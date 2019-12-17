@@ -6,6 +6,7 @@ import os
 import os.path
 import optparse
 import sys
+import datetime
 from datetime import date
 
 ###########################################################################
@@ -147,12 +148,30 @@ if len(sys.argv) == 1:
     sys.exit(-1)
 else:
     usage = "usage: %prog [options] "
+
+    date_act = datetime.datetime.now()
+    date = str(date_act)[:10]
+
+    if date[5:7] >= '05':
+        date_debut = date[:5] + '05-01'
+
+        if date[5:7] <= '09':
+            date_fin = date
+        else:
+            date_fin = date[:5] + '09-31'
+    else:
+        date_debut = str(int(date[:4]) - 1) + '-01'
+        date_fin = str(int(date[:4]) - 1) + '09-31'
+
+    print(date_debut)
+    print(date_fin)
+
     parser = OptionParser(usage=usage)
 
     parser.add_option("-l", "--location", dest="location", action="store", type="string",
                       help="town name (pick one which is not too frequent to avoid confusions)", default=None)
     parser.add_option("-a", "--auth", dest="auth", action="store", type="string",
-                      help="Peps account and password file")
+                      help="Peps account and password file", default="peps.txt")
     parser.add_option("-w", "--write_dir", dest="write_dir", action="store", type="string",
                       help="Path where the products should be downloaded", default='.')
     parser.add_option("-c", "--collection", dest="collection", action="store", type="choice",
@@ -164,7 +183,7 @@ else:
     parser.add_option("-n", "--no_download", dest="no_download", action="store_true",
                       help="Do not download products, just print curl command", default=False)
     parser.add_option("-d", "--start_date", dest="start_date", action="store", type="string",
-                      help="start date, fmt('2015-12-22')", default=None)
+                      help="start date, fmt('2015-12-22')", default=date_debut)
     parser.add_option("-t", "--tile", dest="tile", action="store", type="string",
                       help="Sentinel-2 tile number", default=None)
     parser.add_option("--lat", dest="lat", action="store", type="float",
@@ -182,13 +201,13 @@ else:
     parser.add_option("-o", "--orbit", dest="orbit", action="store", type="int",
                       help="Orbit Path number", default=None)
     parser.add_option("-f", "--end_date", dest="end_date", action="store", type="string",
-                      help="end date, fmt('2015-12-23')", default='9999-01-01')
+                      help="end date, fmt('2015-12-23')", default=date_fin)
     parser.add_option("--json", dest="search_json_file", action="store", type="string",
                       help="Output search JSON filename", default=None)
     parser.add_option("--windows", dest="windows", action="store_true",
                       help="For windows usage", default=False)
     parser.add_option("--cc", "--clouds", dest="clouds", action="store", type="int",
-                      help="Maximum cloud coverage", default=100)
+                      help="Maximum cloud coverage", default=1)
     parser.add_option("--sat", "--satellite", dest="sat", action="store", type="string",
                       help="S1A,S1B,S2A,S2B,S3A,S3B", default=None)
     (options, args) = parser.parse_args()
