@@ -10,7 +10,8 @@ import datetime
 from datetime import date
 
 ###########################################################################
-
+from geopy.geocoders import Nominatim
+geolocator = Nominatim(user_agent="specify_your_app_name_here")
 
 class OptionParser (optparse.OptionParser):
 
@@ -149,19 +150,34 @@ if len(sys.argv) == 1:
 else:
     usage = "usage: %prog [options] "
 
-    date_act = datetime.datetime.now()
-    date = str(date_act)[:10]
+    location = geolocator.geocode(sys.argv[2])
 
-    if date[5:7] >= '05':
-        date_debut = date[:5] + '05-01'
+    date = str(datetime.datetime.now())[:10]
 
-        if date[5:7] <= '09':
-            date_fin = date
+    if location.latitude > 0:
+        mois_debut = '05'
+        mois_fin = '10'
+        if date[5:7] < mois_debut:
+            date_debut = str(int(date[:4]) - 1) + "-" + mois_debut + '-01'
+            date_fin = str(int(date[:4]) - 1) + "-" + mois_fin + '-31'
         else:
-            date_fin = date[:5] + '09-31'
+            date_debut = date[:4] + "-" + mois_debut + '-01'
+            if date[5:7] > mois_fin:
+                date_fin = date[:4] + "-" + mois_fin + '-31'
+            else:
+                date_fin = date
     else:
-        date_debut = str(int(date[:4]) - 1) + '-01'
-        date_fin = str(int(date[:4]) - 1) + '09-31'
+        mois_debut = '11'
+        mois_fin = '04'
+        if date[5:7] < mois_debut:
+            date_debut = str(int(date[:4]) -1) + "-" + mois_debut + '-01'
+            if date[5:7] > mois_fin:
+                date_fin = date[:4] + "-" + mois_fin + '30'
+            else:
+                date_fin = date
+        else:
+            date_debut = date[:4] + "-" + mois_debut + '-01'
+            date_fin = date
 
     print(date_debut)
     print(date_fin)
@@ -173,9 +189,9 @@ else:
     parser.add_option("-a", "--auth", dest="auth", action="store", type="string",
                       help="Peps account and password file", default="peps.txt")
     parser.add_option("-w", "--write_dir", dest="write_dir", action="store", type="string",
-                      help="Path where the products should be downloaded", default='.')
+                      help="Path where the products should be downloaded", default='./DL')
     parser.add_option("-c", "--collection", dest="collection", action="store", type="choice",
-                      help="Collection within theia collections", choices=['S1', 'S2', 'S2ST', 'S3'], default='S2')
+                      help="Collection within theia collections", choices=['S1', 'S2', 'S2ST', 'S3'], default='S2ST')
     parser.add_option("-p", "--product_type", dest="product_type", action="store", type="string",
                       help="GRD, SLC, OCN (for S1) | S2MSI1C S2MSI2A S2MSI2Ap (for S2)", default="")
     parser.add_option("-m", "--sensor_mode", dest="sensor_mode", action="store", type="string",
@@ -207,7 +223,7 @@ else:
     parser.add_option("--windows", dest="windows", action="store_true",
                       help="For windows usage", default=False)
     parser.add_option("--cc", "--clouds", dest="clouds", action="store", type="int",
-                      help="Maximum cloud coverage", default=1)
+                      help="Maximum cloud coverage", default=0)
     parser.add_option("--sat", "--satellite", dest="sat", action="store", type="string",
                       help="S1A,S1B,S2A,S2B,S3A,S3B", default=None)
     (options, args) = parser.parse_args()
