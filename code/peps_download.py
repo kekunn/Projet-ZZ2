@@ -122,7 +122,6 @@ def parse_catalog(search_json_file):
     else:
         print(">>> no product corresponds to selection criteria")
         sys.exit(-1)
-#    print(download_dict.keys())
 
     return(prod, download_dict, storage_dict, size_dict)
 
@@ -189,7 +188,7 @@ else:
     parser.add_option("-a", "--auth", dest="auth", action="store", type="string",
                       help="Peps account and password file", default="peps.txt")
     parser.add_option("-w", "--write_dir", dest="write_dir", action="store", type="string",
-                      help="Path where the products should be downloaded", default='./DL')
+                      help="Path where the products should be downloaded", default='.')
     parser.add_option("-c", "--collection", dest="collection", action="store", type="choice",
                       help="Collection within theia collections", choices=['S1', 'S2', 'S2ST', 'S3'], default='S2ST')
     parser.add_option("-p", "--product_type", dest="product_type", action="store", type="string",
@@ -345,7 +344,6 @@ prod, download_dict, storage_dict, size_dict = parse_catalog(options.search_json
 # ====================
 # Download
 # ====================
-
 
 if len(download_dict) == 0:
     print("No product matches the criteria")
