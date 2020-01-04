@@ -11,7 +11,7 @@ from datetime import date
 
 ###########################################################################
 from geopy.geocoders import Nominatim
-geolocator = Nominatim(user_agent="specify_your_app_name_here")
+geolocator = Nominatim(user_agent="Test_Projet")
 
 class OptionParser (optparse.OptionParser):
 
@@ -57,10 +57,26 @@ def parse_catalog(search_json_file):
     download_dict = {}
     storage_dict = {}
     size_dict = {}
+
+    tuiles = {}
+    nb_tuile = 0
+
+
+    for i in range(len(data["features"])):
+        prod = data["features"][i]["properties"]["productIdentifier"]
+        existe = False
+        for j in tuiles:
+            if tuiles[j] == prod[38:44]:
+                existe = True
+
+        if not existe : 
+            nb_tuile += 1
+            tuiles[nb_tuile] = prod[38:44]
+
     if len(data["features"]) > 0:
         for i in range(len(data["features"])):
             prod = data["features"][i]["properties"]["productIdentifier"]
-            #print(prod, data["features"][i]["properties"]["storage"]["mode"])
+            print(prod)
             feature_id = data["features"][i]["id"]
             try:
                 storage = data["features"][i]["properties"]["storage"]["mode"]
@@ -123,7 +139,7 @@ def parse_catalog(search_json_file):
         print(">>> no product corresponds to selection criteria")
         sys.exit(-1)
 
-    return(prod, download_dict, storage_dict, size_dict)
+    return(prod, download_dict, storage_dict, size_dict, tuiles)
 
 
 # ===================== MAIN
@@ -149,11 +165,15 @@ if len(sys.argv) == 1:
 else:
     usage = "usage: %prog [options] "
 
-    location = geolocator.geocode(sys.argv[2])
+    if sys.argv[1] == "-l":
+        location = geolocator.geocode(sys.argv[2])
+        latitude = location.latitude
+    else:
+        latitude = (int(sys.argv[2]) + int(sys.argv[4])) / 2
 
     date = str(datetime.datetime.now())[:10]
 
-    if location.latitude > 0:
+    if latitude > 0:
         mois_debut = '05'
         mois_fin = '10'
         if date[5:7] < mois_debut:
@@ -339,7 +359,9 @@ print(search_catalog)
 os.system(search_catalog)
 time.sleep(5)
 
-prod, download_dict, storage_dict, size_dict = parse_catalog(options.search_json_file)
+prod, download_dict, storage_dict, size_dict, tuiles = parse_catalog(options.search_json_file)
+
+print(tuiles)
 
 # ====================
 # Download
