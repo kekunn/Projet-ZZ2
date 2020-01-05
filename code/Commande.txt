@@ -1,0 +1,3 @@
+python2 peps_download.py --latmin -30 --latmax -22 --lonmin 14 --lonmax 20
+python2 peps_download.py -l 'Bilbao'
+python2 peps_download.py -l 'Londres'

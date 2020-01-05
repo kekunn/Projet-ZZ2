@@ -76,7 +76,6 @@ def parse_catalog(search_json_file):
     if len(data["features"]) > 0:
         for i in range(len(data["features"])):
             prod = data["features"][i]["properties"]["productIdentifier"]
-            print(prod)
             feature_id = data["features"][i]["id"]
             try:
                 storage = data["features"][i]["properties"]["storage"]["mode"]
@@ -142,6 +141,13 @@ def parse_catalog(search_json_file):
     return(prod, download_dict, storage_dict, size_dict, tuiles)
 
 
+def compare_date(date1, date2):
+    d1 = date(int(date1[:4]), int(date1[4:6]), int(date1[6:8]))
+    d2 = date(int(date2[:4]), int(date2[4:6]), int(date2[6:8]))
+    return abs((d1 - d2).days)
+
+
+
 # ===================== MAIN
 # ==================
 # parse command line
@@ -171,32 +177,37 @@ else:
     else:
         latitude = (int(sys.argv[2]) + int(sys.argv[4])) / 2
 
-    date = str(datetime.datetime.now())[:10]
+    print(latitude)
+    date_act = str(datetime.datetime.now())[:10]
 
-    if latitude > 0:
+    if latitude > 20:
         mois_debut = '05'
         mois_fin = '10'
-        if date[5:7] < mois_debut:
-            date_debut = str(int(date[:4]) - 1) + "-" + mois_debut + '-01'
-            date_fin = str(int(date[:4]) - 1) + "-" + mois_fin + '-31'
+        if date_act[5:7] < mois_debut:
+            date_debut = str(int(date_act[:4]) - 1) + "-" + mois_debut + '-01'
+            date_fin = str(int(date_act[:4]) - 1) + "-" + mois_fin + '-31'
         else:
-            date_debut = date[:4] + "-" + mois_debut + '-01'
-            if date[5:7] > mois_fin:
-                date_fin = date[:4] + "-" + mois_fin + '-31'
+            date_debut = date_act[:4] + "-" + mois_debut + '-01'
+            if date_act[5:7] > mois_fin:
+                date_fin = date_act[:4] + "-" + mois_fin + '-31'
             else:
-                date_fin = date
-    else:
+                date_fin = date_act
+    elif latitude < -20:
         mois_debut = '11'
         mois_fin = '04'
-        if date[5:7] < mois_debut:
-            date_debut = str(int(date[:4]) -1) + "-" + mois_debut + '-01'
-            if date[5:7] > mois_fin:
-                date_fin = date[:4] + "-" + mois_fin + '30'
+        if date_act[5:7] < mois_debut:
+            date_debut = str(int(date_act[:4]) -1) + "-" + mois_debut + '-01'
+            if date_act[5:7] > mois_fin:
+                date_fin = date_act[:4] + "-" + mois_fin + '30'
             else:
-                date_fin = date
+                date_fin = date_act
         else:
-            date_debut = date[:4] + "-" + mois_debut + '-01'
-            date_fin = date
+            date_debut = date_act[:4] + "-" + mois_debut + '-01'
+            date_fin = date_act
+    else:
+        date_debut = str(int(date_act[:4]) - 1) + date_act[4:]
+        date_fin = date_act
+
 
     print(date_debut)
     print(date_fin)
@@ -362,6 +373,8 @@ time.sleep(5)
 prod, download_dict, storage_dict, size_dict, tuiles = parse_catalog(options.search_json_file)
 
 print(tuiles)
+max_tuiles = len(tuiles)
+print(max_tuiles)
 
 # ====================
 # Download
@@ -370,6 +383,31 @@ print(tuiles)
 if len(download_dict) == 0:
     print("No product matches the criteria")
 else:
+    A_Dl = {}
+    best = 0
+    for prod1 in list(download_dict.keys()):
+        act = 1
+        temp = {}
+        temp[act] = prod1
+        for prod2 in list(download_dict.keys()):
+            if prod1 != prod2:
+                inutile = False
+                for i in temp:
+                    if temp[i][32:36] == prod2[32:36]:
+                        if compare_date(temp[i][11:19], prod2[11:19]) != 0 or (temp[i][38:44] == prod2[38:44]):
+                            inutile = True
+                    else:
+                        if compare_date(temp[i][11:19], prod2[11:19]) > 3 or (temp[i][38:44] == prod2[38:44]):
+                            inutile = True
+                if not inutile:
+                    act += 1
+                    temp[act] = prod2
+        if act > best:
+            best = act
+            A_Dl = temp
+
+    print(A_Dl)
+
     # first try for the products on tape
     if options.write_dir == None:
         options.write_dir = os.getcwd()
@@ -407,7 +445,7 @@ else:
         os.system(search_catalog)
         time.sleep(2)
 
-        prod, download_dict, storage_dict, size_dict = parse_catalog(options.search_json_file)
+        prod, download_dict, storage_dict, size_dict, tuiles = parse_catalog(options.search_json_file)
 
         NbProdsToDownload = 0
         # download all products on disk
