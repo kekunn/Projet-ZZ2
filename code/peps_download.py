@@ -11,7 +11,7 @@ from datetime import date
 
 ###########################################################################
 from geopy.geocoders import Nominatim
-geolocator = Nominatim(user_agent="Test_Projet")
+geolocator = Nominatim(user_agent="TestTest")
 
 class OptionParser (optparse.OptionParser):
 
@@ -131,14 +131,51 @@ def parse_catalog(search_json_file):
                         del download_dict[prod], storage_dict[prod], size_dict[prod]
                     except KeyError:
                         pass
-
-        for prod in download_dict.keys():
-            print(prod, storage_dict[prod])
     else:
         print(">>> no product corresponds to selection criteria")
         sys.exit(-1)
 
-    return(prod, download_dict, storage_dict, size_dict, tuiles)
+
+    print(tuiles)
+
+    A_Dl = {}
+    best = 0
+    for prod1 in list(download_dict.keys()):
+        act = 1
+        temp = {}
+        temp[act] = prod1
+        for prod2 in list(download_dict.keys()):
+            if prod1 != prod2:
+                inutile = False
+                for i in temp:
+                    if temp[i][32:36] == prod2[32:36]:
+                        if compare_date(temp[i][11:19], prod2[11:19]) != 0 or (temp[i][38:44] == prod2[38:44]):
+                            inutile = True
+                    else:
+                        if compare_date(temp[i][11:19], prod2[11:19]) > 3 or (temp[i][38:44] == prod2[38:44]):
+                            inutile = True
+                if not inutile:
+                    act += 1
+                    temp[act] = prod2
+        if act > best:
+            best = act
+            A_Dl = temp
+
+    download_dict_final = {}
+    storage_dict_final = {}
+    size_dict_final = {}
+
+    for prod1 in list(download_dict.keys()):
+        for i in A_Dl:
+            if prod1 == A_Dl[i]:
+                download_dict_final[prod1] = download_dict[prod1]
+                storage_dict_final[prod1] = storage_dict[prod1]
+                size_dict_final[prod1] = size_dict[prod1]
+
+    for prod in download_dict_final.keys():
+        print(prod, storage_dict[prod])
+
+    return(prod, download_dict_final, storage_dict_final, size_dict_final)
 
 
 def compare_date(date1, date2):
@@ -370,11 +407,7 @@ print(search_catalog)
 os.system(search_catalog)
 time.sleep(5)
 
-prod, download_dict, storage_dict, size_dict, tuiles = parse_catalog(options.search_json_file)
-
-print(tuiles)
-max_tuiles = len(tuiles)
-print(max_tuiles)
+prod, download_dict, storage_dict, size_dict = parse_catalog(options.search_json_file)
 
 # ====================
 # Download
@@ -383,30 +416,6 @@ print(max_tuiles)
 if len(download_dict) == 0:
     print("No product matches the criteria")
 else:
-    A_Dl = {}
-    best = 0
-    for prod1 in list(download_dict.keys()):
-        act = 1
-        temp = {}
-        temp[act] = prod1
-        for prod2 in list(download_dict.keys()):
-            if prod1 != prod2:
-                inutile = False
-                for i in temp:
-                    if temp[i][32:36] == prod2[32:36]:
-                        if compare_date(temp[i][11:19], prod2[11:19]) != 0 or (temp[i][38:44] == prod2[38:44]):
-                            inutile = True
-                    else:
-                        if compare_date(temp[i][11:19], prod2[11:19]) > 3 or (temp[i][38:44] == prod2[38:44]):
-                            inutile = True
-                if not inutile:
-                    act += 1
-                    temp[act] = prod2
-        if act > best:
-            best = act
-            A_Dl = temp
-
-    print(A_Dl)
 
     # first try for the products on tape
     if options.write_dir == None:
@@ -445,7 +454,7 @@ else:
         os.system(search_catalog)
         time.sleep(2)
 
-        prod, download_dict, storage_dict, size_dict, tuiles = parse_catalog(options.search_json_file)
+        prod, download_dict, storage_dict, size_dict = parse_catalog(options.search_json_file)
 
         NbProdsToDownload = 0
         # download all products on disk
