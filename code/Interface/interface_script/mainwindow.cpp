@@ -89,7 +89,8 @@ void MainWindow::on_pushButton_clicked()
         QStringList arguments{"peps_download.py", "--latmin", QString::fromUtf8(lat_min.c_str()),
                                                   "--latmax", QString::fromUtf8(lat_max.c_str()),
                                                   "--lonmin", QString::fromUtf8(long_min.c_str()),
-                                                  "--lonmax", QString::fromUtf8(long_max.c_str())};
+                                                  "--lonmax", QString::fromUtf8(long_max.c_str()),
+                                                  "--windows"};
         std::cout << "On lance le script Python" << std::endl;
         script.start("python.exe", arguments);
 
