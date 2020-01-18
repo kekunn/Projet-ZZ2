@@ -117,8 +117,7 @@ public:
         font.setPointSize(10);
         output_display->setFont(font);
         output_display->setAutoFillBackground(false);
-        output_display->setStyleSheet(QString::fromUtf8("background-color: black;\n"
-"color: white;"));
+        output_display->setStyleSheet(QString::fromUtf8("background-color: black;"));
         output_display->setReadOnly(false);
         output_display->setOverwriteMode(false);
         progressBar = new QProgressBar(centralwidget);

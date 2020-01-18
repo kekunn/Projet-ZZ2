@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QProcess>
+#include <QDir>
+#include <QThread>
+#include <QObject>
+
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +28,8 @@ private slots:
 
     void on_radioButton_2_clicked();
 
+    void on_radioButton_3_clicked();
+
     void on_pushButton_clicked();
 
     void on_textEdit_textChanged();
@@ -39,11 +45,12 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    bool city;
+    int choice;
     std::string city_name;
     std::string lat_min;
     std::string lat_max;
     std::string long_min;
     std::string long_max;
+    QProcess script;
 };
 #endif // MAINWINDOW_H

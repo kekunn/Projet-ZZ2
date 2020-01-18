@@ -279,6 +279,14 @@ release\moc_mainwindow.cpp: ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qicon.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QDir \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdir.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfileinfo.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QThread \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qthread.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QObject \
 		release\moc_predefs.h \
 		C:\Qt\5.12.6\msvc2017_64\bin\moc.exe
 	C:\Qt\5.12.6\msvc2017_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include D:/Documents/Etudes/Projet_ZZ2/Projet-ZZ2/code/Interface/build-interface_script-Desktop_Qt_5_12_6_MSVC2017_64bit-Debug/release/moc_predefs.h -IC:/Qt/5.12.6/msvc2017_64/mkspecs/win32-msvc -ID:/Documents/Etudes/Projet_ZZ2/Projet-ZZ2/code/Interface/interface_script -IC:/Qt/5.12.6/msvc2017_64/include -IC:/Qt/5.12.6/msvc2017_64/include/QtWidgets -IC:/Qt/5.12.6/msvc2017_64/include/QtGui -IC:/Qt/5.12.6/msvc2017_64/include/QtANGLE -IC:/Qt/5.12.6/msvc2017_64/include/QtCore -I. -I"D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include" -I"D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include" -I"D:\Windows Kits\10\include\10.0.18362.0\ucrt" -I"D:\Windows Kits\10\include\10.0.18362.0\shared" -I"D:\Windows Kits\10\include\10.0.18362.0\um" -I"D:\Windows Kits\10\include\10.0.18362.0\winrt" -I"D:\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\interface_script\mainwindow.h -o release\moc_mainwindow.cpp
@@ -413,6 +421,14 @@ release\main.obj: ..\interface_script\main.cpp ..\interface_script\mainwindow.h 
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qicon.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QDir \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdir.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfileinfo.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QThread \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qthread.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QObject \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QApplication \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qapplication.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qcoreapplication.h \
@@ -528,6 +544,14 @@ release\mainwindow.obj: ..\interface_script\mainwindow.cpp ..\interface_script\m
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qicon.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QDir \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdir.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfileinfo.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QThread \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qthread.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QObject \
 		ui_mainwindow.h
 
 release\moc_mainwindow.obj: release\moc_mainwindow.cpp 
