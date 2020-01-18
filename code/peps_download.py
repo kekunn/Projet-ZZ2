@@ -9,9 +9,9 @@ import sys
 import datetime
 from datetime import date
 
+diff_date_max = 5
+
 ###########################################################################
-from geopy.geocoders import Nominatim
-geolocator = Nominatim(user_agent="TestTest")
 
 class OptionParser (optparse.OptionParser):
 
@@ -45,6 +45,8 @@ def check_rename(tmpfile, prodsize, options):
 
 
 def parse_catalog(search_json_file):
+    global diff_date_max
+
     # Filter catalog result
     with open(search_json_file) as data_file:
         data = json.load(data_file)
@@ -70,8 +72,8 @@ def parse_catalog(search_json_file):
                 existe = True
 
         if not existe : 
-            nb_tuile += 1
             tuiles[nb_tuile] = prod[38:44]
+            nb_tuile += 1
 
     if len(data["features"]) > 0:
         for i in range(len(data["features"])):
@@ -135,31 +137,51 @@ def parse_catalog(search_json_file):
         print(">>> no product corresponds to selection criteria")
         sys.exit(-1)
 
-
+    print("\n\n==============LISTE DES TUILES A TELECHARGER==============")
     print(tuiles)
+
+    liste_img = []
+
+    for prod1 in list(download_dict.keys()):
+        liste_img.append(prod1)
+
+    liste_img.sort(reverse=True, key = lambda x: x[11:19])
 
     A_Dl = {}
     best = 0
-    for prod1 in list(download_dict.keys()):
+    i = 0
+
+    while len(A_Dl) != len(tuiles) and i < len(liste_img):
+
+        prod1 = liste_img[i]
+        prod2 = liste_img[i]
+
+        j = i + 1
         act = 1
         temp = {}
         temp[act] = prod1
-        for prod2 in list(download_dict.keys()):
-            if prod1 != prod2:
-                inutile = False
-                for i in temp:
-                    if temp[i][32:36] == prod2[32:36]:
-                        if compare_date(temp[i][11:19], prod2[11:19]) != 0 or (temp[i][38:44] == prod2[38:44]):
-                            inutile = True
-                    else:
-                        if compare_date(temp[i][11:19], prod2[11:19]) > 3 or (temp[i][38:44] == prod2[38:44]):
-                            inutile = True
-                if not inutile:
-                    act += 1
-                    temp[act] = prod2
+
+        while j < len(liste_img) and compare_date(prod1[11:19], prod2[11:19]) < diff_date_max:
+            prod2 = liste_img[j]
+            inutile = False
+            for k in temp:
+
+                if temp[k][33:37] == prod2[33:37] and compare_date(temp[k][11:19], prod2[11:19]) != 0:
+                    inutile = True
+                if temp[k][38:44] == prod2[38:44]:
+                    inutile = True
+
+            if not inutile:
+                act += 1
+                temp[act] = prod2
+
+            j += 1
+
         if act > best:
             best = act
             A_Dl = temp
+
+        i+=1
 
     download_dict_final = {}
     storage_dict_final = {}
@@ -172,6 +194,7 @@ def parse_catalog(search_json_file):
                 storage_dict_final[prod1] = storage_dict[prod1]
                 size_dict_final[prod1] = size_dict[prod1]
 
+    print("\n\n==========================LISTE DES IMAGES==========================")
     for prod in download_dict_final.keys():
         print(prod, storage_dict[prod])
 
@@ -208,13 +231,8 @@ if len(sys.argv) == 1:
 else:
     usage = "usage: %prog [options] "
 
-    if sys.argv[1] == "-l":
-        location = geolocator.geocode(sys.argv[2])
-        latitude = location.latitude
-    else:
-        latitude = (int(sys.argv[2]) + int(sys.argv[4])) / 2
+    latitude = (float(sys.argv[2]) + float(sys.argv[4])) / 2
 
-    print(latitude)
     date_act = str(datetime.datetime.now())[:10]
 
     if latitude > 20:
@@ -245,9 +263,11 @@ else:
         date_debut = str(int(date_act[:4]) - 1) + date_act[4:]
         date_fin = date_act
 
-
+    print("\n========================DATE DEBUT========================")
     print(date_debut)
+    print("========================DATE FIN========================")
     print(date_fin)
+    print("\n\n")
 
     parser = OptionParser(usage=usage)
 
@@ -256,7 +276,7 @@ else:
     parser.add_option("-a", "--auth", dest="auth", action="store", type="string",
                       help="Peps account and password file", default="peps.txt")
     parser.add_option("-w", "--write_dir", dest="write_dir", action="store", type="string",
-                      help="Path where the products should be downloaded", default='.')
+                      help="Path where the products should be downloaded", default='./DL')
     parser.add_option("-c", "--collection", dest="collection", action="store", type="choice",
                       help="Collection within theia collections", choices=['S1', 'S2', 'S2ST', 'S3'], default='S2ST')
     parser.add_option("-p", "--product_type", dest="product_type", action="store", type="string",
