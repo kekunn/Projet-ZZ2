@@ -34,6 +34,14 @@ void Request::run (Ui::MainWindow* ui, std::vector<QStringList> arguments, int i
             ui->output_display->append(output);
         });
 
+
+        QObject::connect(script, &QProcess::readyRead, this, [this, ui]() {
+            QByteArray output = script->readAll();
+            std::cout << "Sortie : " << output.length() << output.toStdString() << std::endl;
+
+            ui->output_display->append(output);
+        });
+
         QObject::connect(script, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, [this, ui, id, arguments]() {
             std::cout << "Processus terminé !" << std::endl;
             delete(script);

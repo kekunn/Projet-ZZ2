@@ -95,9 +95,6 @@ void MainWindow::on_pushButton_clicked()
                                                   "--lonmax", QString::fromUtf8(long_max.c_str()),
                                                   "--windows"};
         args_list.push_back(arguments);
-        args_list.push_back(arguments);
-        args_list.push_back(arguments);
-
         r.run(ui, args_list, 0);
 
        /* std::cout << "On lance le script Python" << std::endl;
@@ -140,6 +137,8 @@ void MainWindow::on_pushButton_clicked()
         {
             QTextStream in(&file);
             std::vector<std::pair<std::string, std::string>> coord_list;
+            std::vector<QStringList> args_list;
+            QString line = in.readLine();
 
             while (!in.atEnd())
             {
@@ -149,44 +148,21 @@ void MainWindow::on_pushButton_clicked()
                 QStringList list = line.split(rx, QString::SkipEmptyParts);
 
                 coord_list.push_back(std::make_pair(list[0].toStdString(), list[1].toStdString()));
-                std::cout << list[0].toStdString() << " / "<< list[1].toStdString()<< std::endl;
+                //std::cout << list[0].toStdString() << " / "<< list[1].toStdString()<< std::endl;
             }
 
-
-            QStringList arguments{"peps_download.py", "--latmin", QString::fromUtf8(lat_min.c_str()),
-                                                      "--latmax", QString::fromUtf8(lat_max.c_str()),
-                                                      "--lonmin", QString::fromUtf8(long_min.c_str()),
-                                                      "--lonmax", QString::fromUtf8(long_max.c_str()),
-                                                      "--windows"};
-            std::cout << "On lance le script Python" << std::endl;
-            script.start("python.exe", arguments);
-
-            if(!script.waitForStarted())
+            for (int i = 0; i < coord_list.size(); i++)
             {
-                std::cout << "Impossible de lancer le script" << std::endl;
+                QStringList arguments{"peps_download.py", "--latmin", QString::fromStdString(std::get<0>(coord_list[i])),
+                                                          "--latmax", QString::fromStdString(std::get<0>(coord_list[i])),
+                                                          "--lonmin", QString::fromStdString(std::get<1>(coord_list[i])),
+                                                          "--lonmax", QString::fromStdString(std::get<1>(coord_list[i])),
+                                                          "--windows"};
+                std::cout << "Vous avez selectionne : " << QString::fromStdString(std::get<0>(coord_list[i])).toStdString() << " / " << QString::fromStdString(std::get<1>(coord_list[i])).toStdString() << std::endl;
+                args_list.push_back(arguments);
             }
-            else
-            {
 
-                QObject::connect(&script, &QProcess::readyReadStandardError, this, [this]() {
-                    QByteArray output = script.readAllStandardError();
-                    std::cout << "Sortie : " << output.length() << output.toStdString() << std::endl;
-
-                    ui->output_display->append(output);
-                });
-
-                QObject::connect(&script, &QProcess::readyReadStandardOutput, this, [this]() {
-                    QByteArray output = script.readAllStandardOutput();
-                    std::cout << "Sortie : " << output.length() << output.toStdString() << std::endl;
-
-                    ui->output_display->append(output);
-                });
-
-                QObject::connect(&script, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, []() {
-                    std::cout << "Processus terminé !" << std::endl;
-                });
-
-            }
+            r.run(ui, args_list, 0);
         }
     }
 }
@@ -220,7 +196,7 @@ void MainWindow::on_pushButton_2_clicked()
 {
     QString path_file = QFileDialog::getOpenFileName(this,
                                                      tr("Open file"),
-                                                     "C://",
+                                                     "D:/Download_D",
                                                      "All files (*.*);; CSV (*.csv)");
     QMessageBox::information(this, tr("File"), "Vous avez sélectionné : " + path_file);
     ui->textEdit_6->setText(path_file);
