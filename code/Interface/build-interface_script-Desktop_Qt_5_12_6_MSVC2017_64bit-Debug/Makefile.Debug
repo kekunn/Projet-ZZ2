@@ -180,11 +180,9 @@ compiler_moc_header_make_all: debug\moc_Request.cpp debug\moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) debug\moc_Request.cpp debug\moc_mainwindow.cpp
 debug\moc_Request.cpp: ..\interface_script\Request.h \
-		..\interface_script\mainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMainWindow \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgetsglobal.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtguiglobal.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qglobal.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig.h \
@@ -206,15 +204,10 @@ debug\moc_Request.cpp: ..\interface_script\Request.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmutex.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnumeric.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qversiontagging.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtgui-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgets-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qwidget.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnamespace.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs_impl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs_win.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qstring.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qchar.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qbytearray.h \
@@ -239,80 +232,18 @@ debug\moc_Request.cpp: ..\interface_script\Request.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qvarlengtharray.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject_impl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmargins.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpaintdevice.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qrect.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsize.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qpoint.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpalette.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qcolor.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qrgb.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qrgba64.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qbrush.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qvector.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qmatrix.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpolygon.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qregion.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdatastream.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qline.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtransform.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpainterpath.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qimage.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixelformat.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixmap.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qshareddata.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qhash.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer_impl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfont.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfontmetrics.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfontinfo.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qsizepolicy.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qcursor.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qkeysequence.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qevent.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qvariant.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmap.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdebug.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qtextstream.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qlocale.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qset.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qcontiguouscache.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qurl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qurlquery.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfile.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfiledevice.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qvector2d.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtouchdevice.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtabwidget.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qicon.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QtGlobal \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QDir \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdir.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfileinfo.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QThread \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qthread.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QObject \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QFileDialog \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qfiledialog.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qdialog.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMessageBox \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmessagebox.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QTextStream \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile \
 		ui_mainwindow.h \
 		debug\moc_predefs.h \
 		C:\Qt\5.12.6\msvc2017_64\bin\moc.exe
 	C:\Qt\5.12.6\msvc2017_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include D:/Documents/Etudes/Projet_ZZ2/Projet-ZZ2/code/Interface/build-interface_script-Desktop_Qt_5_12_6_MSVC2017_64bit-Debug/debug/moc_predefs.h -IC:/Qt/5.12.6/msvc2017_64/mkspecs/win32-msvc -ID:/Documents/Etudes/Projet_ZZ2/Projet-ZZ2/code/Interface/interface_script -IC:/Qt/5.12.6/msvc2017_64/include -IC:/Qt/5.12.6/msvc2017_64/include/QtWidgets -IC:/Qt/5.12.6/msvc2017_64/include/QtGui -IC:/Qt/5.12.6/msvc2017_64/include/QtANGLE -IC:/Qt/5.12.6/msvc2017_64/include/QtCore -I. -I"D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include" -I"D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include" -I"D:\Windows Kits\10\include\10.0.18362.0\ucrt" -I"D:\Windows Kits\10\include\10.0.18362.0\shared" -I"D:\Windows Kits\10\include\10.0.18362.0\um" -I"D:\Windows Kits\10\include\10.0.18362.0\winrt" -I"D:\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\interface_script\Request.h -o debug\moc_Request.cpp
 
 debug\moc_mainwindow.cpp: ..\interface_script\mainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMainWindow \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgetsglobal.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtguiglobal.h \
+		..\interface_script\Request.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qglobal.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig.h \
@@ -334,15 +265,10 @@ debug\moc_mainwindow.cpp: ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmutex.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnumeric.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qversiontagging.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtgui-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgets-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qwidget.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnamespace.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs_impl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs_win.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qstring.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qchar.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qbytearray.h \
@@ -367,6 +293,18 @@ debug\moc_mainwindow.cpp: ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qvarlengtharray.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject_impl.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qshareddata.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qhash.h \
+		ui_mainwindow.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMainWindow \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmainwindow.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgetsglobal.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtguiglobal.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtgui-config.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgets-config.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qwidget.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs_win.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmargins.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpaintdevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qrect.h \
@@ -382,7 +320,6 @@ debug\moc_mainwindow.cpp: ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpolygon.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qregion.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdatastream.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qline.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtransform.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpainterpath.h \
@@ -390,8 +327,6 @@ debug\moc_mainwindow.cpp: ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixelformat.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixmap.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qshareddata.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qhash.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer_impl.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfont.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfontmetrics.h \
@@ -416,8 +351,6 @@ debug\moc_mainwindow.cpp: ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qicon.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QtGlobal \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QDir \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdir.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfileinfo.h \
@@ -459,11 +392,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 ####### Compile
 
 debug\Request.obj: ..\interface_script\Request.cpp ..\interface_script\Request.h \
-		..\interface_script\mainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMainWindow \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgetsglobal.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtguiglobal.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qglobal.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig.h \
@@ -485,15 +416,10 @@ debug\Request.obj: ..\interface_script\Request.cpp ..\interface_script\Request.h
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmutex.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnumeric.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qversiontagging.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtgui-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgets-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qwidget.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnamespace.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs_impl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs_win.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qstring.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qchar.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qbytearray.h \
@@ -518,77 +444,15 @@ debug\Request.obj: ..\interface_script\Request.cpp ..\interface_script\Request.h
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qvarlengtharray.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject_impl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmargins.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpaintdevice.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qrect.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsize.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qpoint.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpalette.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qcolor.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qrgb.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qrgba64.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qbrush.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qvector.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qmatrix.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpolygon.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qregion.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdatastream.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qline.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtransform.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpainterpath.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qimage.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixelformat.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixmap.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qshareddata.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qhash.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer_impl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfont.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfontmetrics.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfontinfo.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qsizepolicy.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qcursor.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qkeysequence.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qevent.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qvariant.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmap.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdebug.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qtextstream.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qlocale.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qset.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qcontiguouscache.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qurl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qurlquery.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfile.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfiledevice.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qvector2d.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtouchdevice.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtabwidget.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qicon.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QtGlobal \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QDir \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdir.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfileinfo.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QThread \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qthread.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QObject \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QFileDialog \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qfiledialog.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qdialog.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMessageBox \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmessagebox.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QTextStream \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile \
 		ui_mainwindow.h
 
 debug\main.obj: ..\interface_script\main.cpp ..\interface_script\mainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMainWindow \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgetsglobal.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtguiglobal.h \
+		..\interface_script\Request.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qglobal.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig.h \
@@ -610,15 +474,10 @@ debug\main.obj: ..\interface_script\main.cpp ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmutex.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnumeric.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qversiontagging.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtgui-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgets-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qwidget.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnamespace.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs_impl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs_win.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qstring.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qchar.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qbytearray.h \
@@ -643,6 +502,18 @@ debug\main.obj: ..\interface_script\main.cpp ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qvarlengtharray.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject_impl.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qshareddata.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qhash.h \
+		ui_mainwindow.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMainWindow \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmainwindow.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgetsglobal.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtguiglobal.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtgui-config.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgets-config.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qwidget.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs_win.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmargins.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpaintdevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qrect.h \
@@ -658,7 +529,6 @@ debug\main.obj: ..\interface_script\main.cpp ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpolygon.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qregion.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdatastream.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qline.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtransform.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpainterpath.h \
@@ -666,8 +536,6 @@ debug\main.obj: ..\interface_script\main.cpp ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixelformat.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixmap.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qshareddata.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qhash.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer_impl.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfont.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfontmetrics.h \
@@ -692,8 +560,6 @@ debug\main.obj: ..\interface_script\main.cpp ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qicon.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QtGlobal \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QDir \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdir.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfileinfo.h \
@@ -716,10 +582,10 @@ debug\main.obj: ..\interface_script\main.cpp ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qinputmethod.h
 
 debug\mainwindow.obj: ..\interface_script\mainwindow.cpp ..\interface_script\mainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMainWindow \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmainwindow.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgetsglobal.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtguiglobal.h \
+		..\interface_script\Request.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qglobal.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qconfig.h \
@@ -741,15 +607,10 @@ debug\mainwindow.obj: ..\interface_script\mainwindow.cpp ..\interface_script\mai
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmutex.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnumeric.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qversiontagging.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtgui-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgets-config.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qwidget.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qnamespace.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobjectdefs_impl.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs_win.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qstring.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qchar.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qbytearray.h \
@@ -774,6 +635,18 @@ debug\mainwindow.obj: ..\interface_script\mainwindow.cpp ..\interface_script\mai
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qvarlengtharray.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qobject_impl.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qshareddata.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qhash.h \
+		ui_mainwindow.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMainWindow \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmainwindow.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgetsglobal.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtguiglobal.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtgui-config.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtwidgets-config.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qwidget.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs.h \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qwindowdefs_win.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qmargins.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpaintdevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qrect.h \
@@ -789,7 +662,6 @@ debug\mainwindow.obj: ..\interface_script\mainwindow.cpp ..\interface_script\mai
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpolygon.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qregion.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdatastream.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qiodevice.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qline.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qtransform.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpainterpath.h \
@@ -797,8 +669,6 @@ debug\mainwindow.obj: ..\interface_script\mainwindow.cpp ..\interface_script\mai
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixelformat.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qpixmap.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qshareddata.h \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qhash.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qsharedpointer_impl.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfont.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qfontmetrics.h \
@@ -823,8 +693,6 @@ debug\mainwindow.obj: ..\interface_script\mainwindow.cpp ..\interface_script\mai
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtGui\qicon.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QtGlobal \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qprocess.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QDir \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qdir.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\qfileinfo.h \
@@ -837,8 +705,7 @@ debug\mainwindow.obj: ..\interface_script\mainwindow.cpp ..\interface_script\mai
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMessageBox \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmessagebox.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QTextStream \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile \
-		ui_mainwindow.h
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile
 
 debug\moc_Request.obj: debug\moc_Request.cpp 
 

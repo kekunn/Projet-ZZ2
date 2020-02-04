@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
+#include "Request.h"
 #include <QMainWindow>
 #include <QtGlobal>
 #include <QProcess>
@@ -62,5 +62,6 @@ private:
     std::string long_max;
     QProcess script;
     QString file_path;
+    Request r;
 };
 #endif // MAINWINDOW_H

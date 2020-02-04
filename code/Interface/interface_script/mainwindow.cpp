@@ -88,12 +88,19 @@ void MainWindow::on_pushButton_clicked()
     }
     else if (choice == 2)
     {
+        std::vector<QStringList> args_list;
         QStringList arguments{"peps_download.py", "--latmin", QString::fromUtf8(lat_min.c_str()),
                                                   "--latmax", QString::fromUtf8(lat_max.c_str()),
                                                   "--lonmin", QString::fromUtf8(long_min.c_str()),
                                                   "--lonmax", QString::fromUtf8(long_max.c_str()),
                                                   "--windows"};
-        std::cout << "On lance le script Python" << std::endl;
+        args_list.push_back(arguments);
+        args_list.push_back(arguments);
+        args_list.push_back(arguments);
+
+        r.run(ui, args_list, 0);
+
+       /* std::cout << "On lance le script Python" << std::endl;
         script.start("python.exe", arguments);
 
         if(!script.waitForStarted())
@@ -120,7 +127,7 @@ void MainWindow::on_pushButton_clicked()
             QObject::connect(&script, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, []() {
                 std::cout << "Processus terminé !" << std::endl;
             });
-        }
+        }*/
     }
     else if (choice == 3)
     {

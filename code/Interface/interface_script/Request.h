@@ -1,7 +1,8 @@
 #ifndef REQUEST_H
 #define REQUEST_H
 
-#include "mainwindow.h"
+#include <QProcess>
+#include <vector>
 #include "ui_mainwindow.h"
 
 class Request : public QObject
@@ -11,11 +12,11 @@ class Request : public QObject
         Request();
         Request(QStringList arguments);
 
-        void run (Ui::MainWindow* ui);
+        void run (Ui::MainWindow* ui, std::vector<QStringList> arguments, int id);
 
     private :
         QStringList _args;
-        QProcess script;
+        QProcess* script;
 };
 
 
