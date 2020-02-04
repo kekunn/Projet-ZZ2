@@ -124,7 +124,7 @@ public:
         progressBar = new QProgressBar(centralwidget);
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
         progressBar->setGeometry(QRect(50, 520, 721, 23));
-        progressBar->setValue(24);
+        progressBar->setValue(0);
         radioButton_3 = new QRadioButton(centralwidget);
         radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
         radioButton_3->setGeometry(QRect(50, 240, 82, 17));

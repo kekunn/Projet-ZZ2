@@ -12,6 +12,7 @@ void Request::run (Ui::MainWindow* ui, std::vector<QStringList> arguments, int i
 {
     script = new QProcess();
     std::cout << "On lance le script Python id : " << id << std::endl;
+    ui->progressBar->setValue((float)(id + 1) / arguments.size() * 100);
     script->start("python.exe", arguments[id]);
 
     if(!script->waitForStarted())
