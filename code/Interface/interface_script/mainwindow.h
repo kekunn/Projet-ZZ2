@@ -1,11 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
 #include <QMainWindow>
+#include <QtGlobal>
 #include <QProcess>
 #include <QDir>
 #include <QThread>
 #include <QObject>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QTextStream>
+#include <QFile>
 
 #include <iostream>
 #include <stdio.h>
@@ -14,6 +20,7 @@
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
 
 class MainWindow : public QMainWindow
 {
@@ -42,6 +49,8 @@ private slots:
 
     void on_textEdit_5_textChanged();
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -52,5 +61,6 @@ private:
     std::string long_min;
     std::string long_max;
     QProcess script;
+    QString file_path;
 };
 #endif // MAINWINDOW_H
