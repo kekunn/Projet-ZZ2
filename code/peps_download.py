@@ -44,7 +44,7 @@ def check_rename(tmpfile, prodsize, options):
 ###########################################################################
 
 
-def parse_catalog(search_json_file):
+def parse_catalog(search_json_file, affichage):
     global diff_date_max
 
     # Filter catalog result
@@ -71,7 +71,7 @@ def parse_catalog(search_json_file):
             if tuiles[j] == prod[38:44]:
                 existe = True
 
-        if not existe : 
+        if not existe and prod[39:41] != "60" and prod[39:41] != "01": 
             tuiles[nb_tuile] = prod[38:44]
             nb_tuile += 1
 
@@ -137,51 +137,82 @@ def parse_catalog(search_json_file):
         print(">>> no product corresponds to selection criteria")
         sys.exit(-1)
 
-    print("\n\n==============LISTE DES TUILES A TELECHARGER==============")
-    print(tuiles)
-
     liste_img = []
 
+
+    # On récupère la liste des images dans une liste pour un traitement plus facile
     for prod1 in list(download_dict.keys()):
         liste_img.append(prod1)
 
+
+    #On trie la liste pour un traitement plus efficace et aussi prendre les images les plus récentes en prioritées
     liste_img.sort(reverse=True, key = lambda x: x[11:19])
+
+    if affichage : 
+        print("\n\n===========================IMAGES OBTENU===========================")
+        for product in liste_img :
+            print(product)
+
+        print("\n\n=================TUILES A TELECHARGER=================")
+        print(tuiles)
+
+    boucle = 0
+
+    if latitude > 20:
+        mois_debut = '08'
+        mois_fin = '07'
+    elif latitude < -20:
+        mois_debut = '02'
+        mois_fin = '01'
+    else:
+        boucle = 1
 
     A_Dl = {}
     best = 0
-    i = 0
 
-    while len(A_Dl) != len(tuiles) and i < len(liste_img):
+    #On fait deux tours de boucle, un en prenant certain mois en priorité un 
+    while len(A_Dl) != len(tuiles) and boucle < 2:
 
-        prod1 = liste_img[i]
-        prod2 = liste_img[i]
+        i = 0
 
-        j = i + 1
-        act = 1
-        temp = {}
-        temp[act] = prod1
+        if boucle == 0 :
+            while i < len(liste_img) and liste_img[i][15:17] > mois_debut :
+                i += 1;
 
-        while j < len(liste_img) and compare_date(prod1[11:19], prod2[11:19]) < diff_date_max:
-            prod2 = liste_img[j]
-            inutile = False
-            for k in temp:
+        #On récupère 
+        while len(A_Dl) != len(tuiles) and i < len(liste_img):
 
-                if temp[k][33:37] == prod2[33:37] and compare_date(temp[k][11:19], prod2[11:19]) != 0:
-                    inutile = True
-                if temp[k][38:44] == prod2[38:44]:
-                    inutile = True
+            prod1 = liste_img[i]
+            prod2 = liste_img[i]
 
-            if not inutile:
-                act += 1
-                temp[act] = prod2
+            j = i + 1
+            act = 1
+            temp = {}
+            temp[act] = prod1
 
-            j += 1
+            while j < len(liste_img) and compare_date(prod1[11:19], prod2[11:19]) < diff_date_max and (boucle == 1 or prod2[15:17] >= mois_fin) :
+                prod2 = liste_img[j]
+                inutile = False
+                for k in temp:
 
-        if act > best:
-            best = act
-            A_Dl = temp
+                    if temp[k][33:37] == prod2[33:37] and compare_date(temp[k][11:19], prod2[11:19]) != 0:
+                        inutile = True
+                    if temp[k][38:44] == prod2[38:44]:
+                        inutile = True
 
-        i+=1
+                if not inutile:
+                    act += 1
+                    temp[act] = prod2
+
+                j += 1
+
+            if act > best:
+                best = act
+                A_Dl = temp
+
+            i+=1
+
+        boucle += 1
 
     download_dict_final = {}
     storage_dict_final = {}
@@ -194,18 +225,32 @@ def parse_catalog(search_json_file):
                 storage_dict_final[prod1] = storage_dict[prod1]
                 size_dict_final[prod1] = size_dict[prod1]
 
-    print("\n\n==========================LISTE DES IMAGES==========================")
-    for prod in download_dict_final.keys():
-        print(prod, storage_dict[prod])
+
+    if affichage :
+        print("\n\n==========================IMAGES==========================")
+        for prod in download_dict_final.keys():
+            print(prod)
+
+        print("\n\n=====================TUILES NON TROUVE=====================")
+        for i in range(len(tuiles)):
+            existe = False
+            for prod in download_dict_final.keys():
+                if(tuiles[i] == prod[38:44]):
+                    existe = True
+
+            if not existe :
+                print(tuiles[i])
+
+        print("\n\n\n")
 
     return(prod, download_dict_final, storage_dict_final, size_dict_final)
+
 
 
 def compare_date(date1, date2):
     d1 = date(int(date1[:4]), int(date1[4:6]), int(date1[6:8]))
     d2 = date(int(date2[:4]), int(date2[4:6]), int(date2[6:8]))
     return abs((d1 - d2).days)
-
 
 
 # ===================== MAIN
@@ -427,7 +472,7 @@ print(search_catalog)
 os.system(search_catalog)
 time.sleep(5)
 
-prod, download_dict, storage_dict, size_dict = parse_catalog(options.search_json_file)
+prod, download_dict, storage_dict, size_dict = parse_catalog(options.search_json_file, True)
 
 # ====================
 # Download
@@ -474,7 +519,7 @@ else:
         os.system(search_catalog)
         time.sleep(2)
 
-        prod, download_dict, storage_dict, size_dict = parse_catalog(options.search_json_file)
+        prod, download_dict, storage_dict, size_dict = parse_catalog(options.search_json_file, False)
 
         NbProdsToDownload = 0
         # download all products on disk
