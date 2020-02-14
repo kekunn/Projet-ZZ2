@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QProgressBar>
@@ -39,12 +40,13 @@ public:
     QTextBrowser *textBrowser_2;
     QTextBrowser *textBrowser_3;
     QTextBrowser *textBrowser_4;
-    QTextBrowser *textBrowser_5;
     QTextBrowser *output_display;
     QProgressBar *progressBar;
     QRadioButton *radioButton_3;
     QPushButton *pushButton_2;
     QTextEdit *textEdit_6;
+    QLabel *label;
+    QLabel *label_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -52,20 +54,20 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(829, 694);
+        MainWindow->resize(824, 821);
         MainWindow->setAutoFillBackground(true);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         radioButton = new QRadioButton(centralwidget);
         radioButton->setObjectName(QString::fromUtf8("radioButton"));
         radioButton->setEnabled(true);
-        radioButton->setGeometry(QRect(50, 120, 82, 17));
+        radioButton->setGeometry(QRect(50, 130, 82, 17));
         radioButton->setCheckable(true);
         radioButton->setChecked(false);
         radioButton->setAutoRepeat(false);
         radioButton_2 = new QRadioButton(centralwidget);
         radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
-        radioButton_2->setGeometry(QRect(540, 120, 82, 17));
+        radioButton_2->setGeometry(QRect(410, 130, 82, 17));
         textEdit = new QTextEdit(centralwidget);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
         textEdit->setEnabled(false);
@@ -81,14 +83,14 @@ public:
         textEdit_4 = new QTextEdit(centralwidget);
         textEdit_4->setObjectName(QString::fromUtf8("textEdit_4"));
         textEdit_4->setEnabled(false);
-        textEdit_4->setGeometry(QRect(490, 210, 104, 31));
+        textEdit_4->setGeometry(QRect(490, 230, 104, 31));
         textEdit_5 = new QTextEdit(centralwidget);
         textEdit_5->setObjectName(QString::fromUtf8("textEdit_5"));
         textEdit_5->setEnabled(false);
-        textEdit_5->setGeometry(QRect(690, 210, 104, 31));
+        textEdit_5->setGeometry(QRect(690, 230, 104, 31));
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(280, 580, 231, 61));
+        pushButton->setGeometry(QRect(280, 710, 231, 61));
         textBrowser = new QTextBrowser(centralwidget);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
         textBrowser->setGeometry(QRect(410, 160, 81, 31));
@@ -96,7 +98,7 @@ public:
         textBrowser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         textBrowser_2 = new QTextBrowser(centralwidget);
         textBrowser_2->setObjectName(QString::fromUtf8("textBrowser_2"));
-        textBrowser_2->setGeometry(QRect(410, 210, 81, 31));
+        textBrowser_2->setGeometry(QRect(410, 230, 81, 31));
         textBrowser_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         textBrowser_3 = new QTextBrowser(centralwidget);
         textBrowser_3->setObjectName(QString::fromUtf8("textBrowser_3"));
@@ -104,39 +106,50 @@ public:
         textBrowser_3->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         textBrowser_4 = new QTextBrowser(centralwidget);
         textBrowser_4->setObjectName(QString::fromUtf8("textBrowser_4"));
-        textBrowser_4->setGeometry(QRect(610, 210, 81, 31));
+        textBrowser_4->setGeometry(QRect(610, 230, 81, 31));
         textBrowser_4->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        textBrowser_5 = new QTextBrowser(centralwidget);
-        textBrowser_5->setObjectName(QString::fromUtf8("textBrowser_5"));
-        textBrowser_5->setGeometry(QRect(140, 20, 521, 81));
         output_display = new QTextBrowser(centralwidget);
         output_display->setObjectName(QString::fromUtf8("output_display"));
-        output_display->setGeometry(QRect(50, 330, 721, 171));
+        output_display->setGeometry(QRect(50, 300, 721, 371));
         QFont font;
-        font.setFamily(QString::fromUtf8("Calibri Light"));
-        font.setPointSize(10);
+        font.setFamily(QString::fromUtf8("Bahnschrift SemiLight Condensed"));
+        font.setPointSize(14);
         output_display->setFont(font);
         output_display->setAutoFillBackground(false);
-        output_display->setStyleSheet(QString::fromUtf8("background-color: black;"));
+        output_display->setStyleSheet(QString::fromUtf8("background-color: black;\n"
+"color: white;"));
         output_display->setReadOnly(false);
         output_display->setOverwriteMode(false);
         progressBar = new QProgressBar(centralwidget);
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
-        progressBar->setGeometry(QRect(50, 520, 721, 23));
-        progressBar->setValue(24);
+        progressBar->setGeometry(QRect(50, 680, 721, 23));
+        progressBar->setValue(0);
         radioButton_3 = new QRadioButton(centralwidget);
         radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
-        radioButton_3->setGeometry(QRect(50, 240, 82, 17));
+        radioButton_3->setGeometry(QRect(50, 200, 82, 17));
         pushButton_2 = new QPushButton(centralwidget);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(50, 270, 75, 31));
+        pushButton_2->setEnabled(false);
+        pushButton_2->setGeometry(QRect(50, 230, 75, 31));
         textEdit_6 = new QTextEdit(centralwidget);
         textEdit_6->setObjectName(QString::fromUtf8("textEdit_6"));
-        textEdit_6->setGeometry(QRect(130, 270, 291, 31));
+        textEdit_6->setEnabled(false);
+        textEdit_6->setGeometry(QRect(130, 230, 251, 31));
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(50, 20, 111, 71));
+        label->setPixmap(QPixmap(QString::fromUtf8("C:/Users/Antony/Desktop/planetobserver_logo.png")));
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(180, 30, 611, 51));
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Bahnschrift SemiLight Condensed"));
+        font1.setPointSize(22);
+        label_2->setFont(font1);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 829, 21));
+        menubar->setGeometry(QRect(0, 0, 824, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -175,18 +188,15 @@ public:
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2';\">Longitude Max</span></p></body></html>", nullptr));
-        textBrowser_5->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:20pt;\">Selectionnez une ville ou une zone o\303\271 vous souhaitez lancer votre recherche :</span></p></body></html>", nullptr));
         output_display->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Calibri Light'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:'Bahnschrift SemiLight Condensed'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;\"><br /></p></body></html>", nullptr));
         radioButton_3->setText(QApplication::translate("MainWindow", "Fichier CSV", nullptr));
         pushButton_2->setText(QApplication::translate("MainWindow", "Choisir ...", nullptr));
+        label->setText(QString());
+        label_2->setText(QApplication::translate("MainWindow", "S\303\251lectionnez une zone \303\240 t\303\251l\303\251charger ou ins\303\251rer un fichier CSV :", nullptr));
     } // retranslateUi
 
 };
