@@ -138,7 +138,7 @@ public:
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(50, 20, 111, 71));
-        label->setPixmap(QPixmap(QString::fromUtf8("C:/Users/Antony/Desktop/planetobserver_logo.png")));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/planetobserver_logo.png")));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(180, 30, 611, 51));

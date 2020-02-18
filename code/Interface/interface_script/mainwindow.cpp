@@ -96,35 +96,6 @@ void MainWindow::on_pushButton_clicked()
                                                   "--windows"};
         args_list.push_back(arguments);
         r.run(ui, args_list, 0);
-
-       /* std::cout << "On lance le script Python" << std::endl;
-        script.start("python.exe", arguments);
-
-        if(!script.waitForStarted())
-        {
-            std::cout << "Impossible de lancer le script" << std::endl;
-        }
-        else
-        {
-
-            QObject::connect(&script, &QProcess::readyReadStandardError, this, [this]() {
-                QByteArray output = script.readAllStandardError();
-                std::cout << "Sortie : " << output.length() << output.toStdString() << std::endl;
-
-                ui->output_display->append(output);
-            });
-
-            QObject::connect(&script, &QProcess::readyReadStandardOutput, this, [this]() {
-                QByteArray output = script.readAllStandardOutput();
-                std::cout << "Sortie : " << output.length() << output.toStdString() << std::endl;
-
-                ui->output_display->append(output);
-            });
-
-            QObject::connect(&script, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, []() {
-                std::cout << "Processus terminé !" << std::endl;
-            });
-        }*/
     }
     else if (choice == 3)
     {
@@ -139,25 +110,39 @@ void MainWindow::on_pushButton_clicked()
             std::vector<std::pair<std::string, std::string>> coord_list;
             std::vector<QStringList> args_list;
             QString line = in.readLine();
+            std::vector<QString> name_list;
 
             while (!in.atEnd())
             {
+                QDir root;
                 QString line = in.readLine();
 
                 QRegExp rx("[;]");// match a comma
                 QStringList list = line.split(rx, QString::SkipEmptyParts);
 
                 coord_list.push_back(std::make_pair(list[0].toStdString(), list[1].toStdString()));
-                //std::cout << list[0].toStdString() << " / "<< list[1].toStdString()<< std::endl;
+                name_list.push_back(list[2]);
+                root.mkdir(root.absolutePath() + "/DL/" + list[2]);
             }
 
             for (int i = 0; i < coord_list.size(); i++)
             {
-                QStringList arguments{"peps_download.py", "--latmin", QString::fromStdString(std::get<0>(coord_list[i])),
-                                                          "--latmax", QString::fromStdString(std::get<0>(coord_list[i])),
-                                                          "--lonmin", QString::fromStdString(std::get<1>(coord_list[i])),
-                                                          "--lonmax", QString::fromStdString(std::get<1>(coord_list[i])),
-                                                          "--windows"};
+                QString latmin, latmax, longmin, longmax;
+
+                double lattitude = std::stod(std::get<0>(coord_list[i]));
+                double longitude = std::stod(std::get<1>(coord_list[i]));
+
+                latmin = QString::number(lattitude - 0.2);
+                latmax = QString::number(lattitude + 0.2);
+                longmin = QString::number(longitude - 0.2);
+                longmax = QString::number(longitude + 0.2);
+
+                QStringList arguments{"peps_download.py", "--latmin", latmin,
+                                                          "--latmax", latmax,
+                                                          "--lonmin", longmin,
+                                                          "--lonmax", longmax,
+                                                          "--windows",
+                                                          "-w", "./DL/" + name_list[i] };
                 std::cout << "Vous avez selectionne : " << QString::fromStdString(std::get<0>(coord_list[i])).toStdString() << " / " << QString::fromStdString(std::get<1>(coord_list[i])).toStdString() << std::endl;
                 args_list.push_back(arguments);
             }

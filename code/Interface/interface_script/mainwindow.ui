@@ -322,7 +322,7 @@ p, li { white-space: pre-wrap; }
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Antony/Desktop/planetobserver_logo.png</pixmap>
+     <pixmap resource="image_presentation.qrc">:/planetobserver_logo.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -357,6 +357,8 @@ p, li { white-space: pre-wrap; }
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="image_presentation.qrc"/>
+ </resources>
  <connections/>
 </ui>

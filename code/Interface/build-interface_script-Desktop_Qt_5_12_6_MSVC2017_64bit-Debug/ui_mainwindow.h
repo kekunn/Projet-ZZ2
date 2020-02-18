@@ -54,7 +54,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(824, 900);
+        MainWindow->resize(824, 821);
         MainWindow->setAutoFillBackground(true);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
@@ -90,7 +90,7 @@ public:
         textEdit_5->setGeometry(QRect(690, 230, 104, 31));
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(280, 790, 231, 61));
+        pushButton->setGeometry(QRect(280, 710, 231, 61));
         textBrowser = new QTextBrowser(centralwidget);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
         textBrowser->setGeometry(QRect(410, 160, 81, 31));
@@ -110,7 +110,7 @@ public:
         textBrowser_4->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         output_display = new QTextBrowser(centralwidget);
         output_display->setObjectName(QString::fromUtf8("output_display"));
-        output_display->setGeometry(QRect(50, 300, 721, 431));
+        output_display->setGeometry(QRect(50, 300, 721, 371));
         QFont font;
         font.setFamily(QString::fromUtf8("Bahnschrift SemiLight Condensed"));
         font.setPointSize(14);
@@ -122,21 +122,23 @@ public:
         output_display->setOverwriteMode(false);
         progressBar = new QProgressBar(centralwidget);
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
-        progressBar->setGeometry(QRect(50, 760, 721, 23));
+        progressBar->setGeometry(QRect(50, 680, 721, 23));
         progressBar->setValue(0);
         radioButton_3 = new QRadioButton(centralwidget);
         radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
         radioButton_3->setGeometry(QRect(50, 200, 82, 17));
         pushButton_2 = new QPushButton(centralwidget);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setEnabled(false);
         pushButton_2->setGeometry(QRect(50, 230, 75, 31));
         textEdit_6 = new QTextEdit(centralwidget);
         textEdit_6->setObjectName(QString::fromUtf8("textEdit_6"));
+        textEdit_6->setEnabled(false);
         textEdit_6->setGeometry(QRect(130, 230, 251, 31));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(50, 20, 111, 71));
-        label->setPixmap(QPixmap(QString::fromUtf8("C:/Users/Antony/Desktop/planetobserver_logo.png")));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/planetobserver_logo.png")));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(180, 30, 611, 51));
