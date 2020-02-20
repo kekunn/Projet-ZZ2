@@ -142,10 +142,7 @@ def parse_catalog(search_json_file, affichage):
 
     # On récupère la liste des images dans une liste pour un traitement plus facile
     for prod1 in list(download_dict.keys()):
-        print(storage_dict[prod1])
-        if(storage_dict[prod1] != 'tape'):
-            print("ajoute")
-            liste_img.append(prod1)
+        liste_img.append(prod1)
 
 
     #On trie la liste pour un traitement plus efficace et aussi prendre les images les plus récentes en prioritées
@@ -247,6 +244,7 @@ def parse_catalog(search_json_file, affichage):
         print("\n\n\n")
 
     return(prod, download_dict_final, storage_dict_final, size_dict_final)
+
 
 
 def compare_date(date1, date2):
