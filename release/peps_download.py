@@ -550,12 +550,11 @@ else:
 
         # download all products on tape
         for prod in list(download_dict.keys()):
-            manquant.write(prod[38:44] + "\n")
-#            file_exists = os.path.exists(("%s/%s.SAFE") % (options.write_dir, prod)
-#                                         ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
-#            if (not(options.no_download) and not(file_exists)):
-#                if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
-#                    NbProdsToDownload += 1
+            file_exists = os.path.exists(("%s/%s.SAFE") % (options.write_dir, prod)
+                                         ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
+            if (not(options.no_download) and not(file_exists)):
+                if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
+                    manquant.write(prod[38:44] + "\n")
 
         if NbProdsToDownload > 0:
             print("##############################################################################")
