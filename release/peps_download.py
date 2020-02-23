@@ -13,7 +13,7 @@ from datetime import date
 diff_date_max = 5
 
 #Nom des fichiers ou les indicateurs des tuiles manquantes sont contenus
-manquant = open("./DL/manquant.txt", "w")
+manquant = open(sys.argv[11] + "/manquant.txt", "w")
 
 ###########################################################################
 
