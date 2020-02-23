@@ -198,10 +198,9 @@ def parse_catalog(search_json_file, affichage):
                 prod2 = liste_img[j]
                 inutile = False
                 for k in temp:
-
                     if temp[k][33:37] == prod2[33:37] and compare_date(temp[k][11:19], prod2[11:19]) != 0:
                         inutile = True
-                    if temp[k][38:44] == prod2[38:44]:
+                    if temp[k][38:44] == prod2[38:44] or temp[k][39:41]== '01' or temp[k][39:41]== '60':
                         inutile = True
 
                 if not inutile:
@@ -550,12 +549,11 @@ else:
 
         # download all products on tape
         for prod in list(download_dict.keys()):
-            manquant.write(prod[38:44] + "\n")
-#            file_exists = os.path.exists(("%s/%s.SAFE") % (options.write_dir, prod)
-#                                         ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
-#            if (not(options.no_download) and not(file_exists)):
-#                if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
-#                    NbProdsToDownload += 1
+            file_exists = os.path.exists(("%s/%s.SAFE") % (options.write_dir, prod)
+                                         ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
+            if (not(options.no_download) and not(file_exists)):
+                if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
+                    manquant.write(prod[38:44] + "\n")
 
         if NbProdsToDownload > 0:
             print("##############################################################################")
@@ -565,3 +563,7 @@ else:
             time.sleep(60)
 
 manquant.close()
+
+
+if (os.path.getsize("./DL/manquant.txt") == 0) : 
+    os.remove("./DL/manquant.txt")

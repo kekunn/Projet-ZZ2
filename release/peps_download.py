@@ -13,7 +13,7 @@ from datetime import date
 diff_date_max = 5
 
 #Nom des fichiers ou les indicateurs des tuiles manquantes sont contenus
-manquant = open(sys.argv[11] + "/manquant.txt", "w")
+manquant = open("sys.argv[11] + "/manquant.txt"", "w")
 
 ###########################################################################
 
@@ -198,10 +198,9 @@ def parse_catalog(search_json_file, affichage):
                 prod2 = liste_img[j]
                 inutile = False
                 for k in temp:
-
                     if temp[k][33:37] == prod2[33:37] and compare_date(temp[k][11:19], prod2[11:19]) != 0:
                         inutile = True
-                    if temp[k][38:44] == prod2[38:44]:
+                    if temp[k][38:44] == prod2[38:44] or temp[k][39:41]== '01' or temp[k][39:41]== '60':
                         inutile = True
 
                 if not inutile:
@@ -564,3 +563,7 @@ else:
             time.sleep(60)
 
 manquant.close()
+
+
+if (os.path.getsize(sys.argv[11] + "/manquant.txt") == 0) : 
+    os.remove("sys.argv[11] + "/manquant.txt"")
