@@ -149,7 +149,7 @@ def parse_catalog(search_json_file, affichage):
     liste_img.sort(reverse=True, key = lambda x: x[11:19])
 
     if affichage : 
-        print("\n\n===========================IMAGES OBTENU===========================")
+        print("\n\n===========================TUILES TROUVEES===========================")
         for product in liste_img :
             print(product)
 
@@ -227,9 +227,9 @@ def parse_catalog(search_json_file, affichage):
 
 
     if affichage :
-        print("\n\n==========================IMAGES==========================")
+        print("\n\n==========================TUILES A TELECHARGER==========================")
         for prod in download_dict_final.keys():
-            print(prod)
+            print(prod, storage_dict_final[prod])
 
         print("\n\n=====================TUILES NON TROUVE=====================")
         for i in range(len(tuiles)):
@@ -544,13 +544,13 @@ else:
             elif file_exists:
                 print("%s already exists" % prod)
 
-        # download all products on tape
-        for prod in list(download_dict.keys()):
-            file_exists = os.path.exists(("%s/%s.SAFE") % (options.write_dir, prod)
-                                         ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
-            if (not(options.no_download) and not(file_exists)):
-                if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
-                    NbProdsToDownload += 1
+#        # download all products on tape
+#        for prod in list(download_dict.keys()):
+#            file_exists = os.path.exists(("%s/%s.SAFE") % (options.write_dir, prod)
+#                                         ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
+#            if (not(options.no_download) and not(file_exists)):
+#                if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
+#                    NbProdsToDownload += 1
 
         if NbProdsToDownload > 0:
             print("##############################################################################")
