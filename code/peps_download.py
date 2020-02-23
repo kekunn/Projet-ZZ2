@@ -9,7 +9,11 @@ import sys
 import datetime
 from datetime import date
 
+#nombre de jours maximal entre 2 dates lors du téléchargement
 diff_date_max = 5
+
+#Nom des fichiers ou les indicateurs des tuiles manquantes sont contenus
+manquant = open("./DL/manquant.txt", "w")
 
 ###########################################################################
 
@@ -45,7 +49,7 @@ def check_rename(tmpfile, prodsize, options):
 
 
 def parse_catalog(search_json_file, affichage):
-    global diff_date_max
+    global diff_date_max, manquant
 
     # Filter catalog result
     with open(search_json_file) as data_file:
@@ -231,7 +235,7 @@ def parse_catalog(search_json_file, affichage):
         for prod in download_dict_final.keys():
             print(prod, storage_dict_final[prod])
 
-        print("\n\n=====================TUILES NON TROUVE=====================")
+
         for i in range(len(tuiles)):
             existe = False
             for prod in download_dict_final.keys():
@@ -239,7 +243,7 @@ def parse_catalog(search_json_file, affichage):
                     existe = True
 
             if not existe :
-                print(tuiles[i])
+                manquant.write(tuiles[i] + "\n")
 
         print("\n\n\n")
 
@@ -544,8 +548,9 @@ else:
             elif file_exists:
                 print("%s already exists" % prod)
 
-#        # download all products on tape
-#        for prod in list(download_dict.keys()):
+        # download all products on tape
+        for prod in list(download_dict.keys()):
+            manquant.write(prod[38:44] + "\n")
 #            file_exists = os.path.exists(("%s/%s.SAFE") % (options.write_dir, prod)
 #                                         ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
 #            if (not(options.no_download) and not(file_exists)):
@@ -558,3 +563,5 @@ else:
                   NbProdsToDownload)
             print("##############################################################################")
             time.sleep(60)
+
+manquant.close()
