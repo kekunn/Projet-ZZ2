@@ -359,6 +359,8 @@ else:
                       help="Maximum cloud coverage", default=0)
     parser.add_option("--sat", "--satellite", dest="sat", action="store", type="string",
                       help="S1A,S1B,S2A,S2B,S3A,S3B", default=None)
+    parser.add_option("--tape", "--tape", dest="tape", action="store_true",
+                      help="Download on tape file or not", default=False)
     (options, args) = parser.parse_args()
 
 
@@ -556,7 +558,10 @@ else:
                                          ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
             if (not(options.no_download) and not(file_exists)):
                 if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
-                    manquant.write(prod[38:44] + "\n")
+                    if options.tape :
+                        NbProdsToDownload += 1
+                    else:
+                        manquant.write(prod[38:44] + "\n")
 
         if NbProdsToDownload > 0:
             print("##############################################################################")
