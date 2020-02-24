@@ -559,9 +559,9 @@ else:
             if (not(options.no_download) and not(file_exists)):
                 if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
                     if options.tape :
-                        manquant.write(prod[38:44] + "\n")
+                        NbProdsToDownload += 1
                     else:
-                        NbProdsToDownload++
+                        manquant.write(prod[38:44] + "\n")
 
         if NbProdsToDownload > 0:
             print("##############################################################################")
