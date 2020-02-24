@@ -195,10 +195,9 @@ def parse_catalog(search_json_file, affichage):
                 prod2 = liste_img[j]
                 inutile = False
                 for k in temp:
-
                     if temp[k][33:37] == prod2[33:37] and compare_date(temp[k][11:19], prod2[11:19]) != 0:
                         inutile = True
-                    if temp[k][38:44] == prod2[38:44]:
+                    if temp[k][38:44] == prod2[38:44] or temp[k][39:41]== '01' or temp[k][39:41]== '60':
                         inutile = True
 
                 if not inutile:
@@ -567,5 +566,11 @@ else:
 
 manquant.close()
 
+<<<<<<< HEAD
 if os.path.getsize(options.write_dir + "/manquant.txt") == 0:
     os.remove(options.write_dir + "/manquant.txt")
+=======
+
+if (os.path.getsize(sys.argv[11] + "/manquant.txt") == 0) : 
+    os.remove(sys.argv[11] + "/manquant.txt")
+>>>>>>> 055b5494b5cefcd43fbfc634b594e996d38f92a6
