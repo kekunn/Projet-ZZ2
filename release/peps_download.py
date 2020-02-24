@@ -12,9 +12,6 @@ from datetime import date
 #nombre de jours maximal entre 2 dates lors du téléchargement
 diff_date_max = 5
 
-#Nom des fichiers ou les indicateurs des tuiles manquantes sont contenus
-manquant = open(sys.argv[11] + "/manquant.txt", "w")
-
 ###########################################################################
 
 class OptionParser (optparse.OptionParser):
@@ -364,6 +361,11 @@ else:
                       help="S1A,S1B,S2A,S2B,S3A,S3B", default=None)
     (options, args) = parser.parse_args()
 
+
+#Nom des fichiers ou les indicateurs des tuiles manquantes sont contenus
+manquant = open(options.write_dir + "/manquant.txt", "w+")
+
+
 if options.search_json_file is None or options.search_json_file == "":
     options.search_json_file = 'search.json'
 
@@ -564,3 +566,6 @@ else:
             time.sleep(60)
 
 manquant.close()
+
+if os.path.getsize(options.write_dir + "/manquant.txt") == 0:
+    os.remove(options.write_dir + "/manquant.txt")

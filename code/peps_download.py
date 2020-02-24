@@ -12,9 +12,6 @@ from datetime import date
 #nombre de jours maximal entre 2 dates lors du téléchargement
 diff_date_max = 5
 
-#Nom des fichiers ou les indicateurs des tuiles manquantes sont contenus
-manquant = open("./DL/manquant.txt", "w")
-
 ###########################################################################
 
 class OptionParser (optparse.OptionParser):
@@ -364,6 +361,11 @@ else:
                       help="S1A,S1B,S2A,S2B,S3A,S3B", default=None)
     (options, args) = parser.parse_args()
 
+
+#Nom des fichiers ou les indicateurs des tuiles manquantes sont contenus
+manquant = open(options.write_dir + "/manquant.txt", "w+")
+
+
 if options.search_json_file is None or options.search_json_file == "":
     options.search_json_file = 'search.json'
 
@@ -550,12 +552,11 @@ else:
 
         # download all products on tape
         for prod in list(download_dict.keys()):
-            manquant.write(prod[38:44] + "\n")
-#            file_exists = os.path.exists(("%s/%s.SAFE") % (options.write_dir, prod)
-#                                         ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
-#            if (not(options.no_download) and not(file_exists)):
-#                if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
-#                    NbProdsToDownload += 1
+            file_exists = os.path.exists(("%s/%s.SAFE") % (options.write_dir, prod)
+                                         ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
+            if (not(options.no_download) and not(file_exists)):
+                if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
+                    manquant.write(prod[38:44] + "\n")
 
         if NbProdsToDownload > 0:
             print("##############################################################################")
@@ -565,3 +566,6 @@ else:
             time.sleep(60)
 
 manquant.close()
+
+if os.path.getsize(options.write_dir + "/manquant.txt") == 0:
+    os.remove(options.write_dir + "/manquant.txt")
