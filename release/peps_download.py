@@ -150,7 +150,7 @@ def parse_catalog(search_json_file, affichage):
     liste_img.sort(reverse=True, key = lambda x: x[11:19])
 
     if affichage : 
-        print("\n\n===========================TUILES TROUVEES===========================")
+        print("\n\n===========================IMAGES TROUVEES===========================")
         for product in liste_img :
             print(product)
 
@@ -228,7 +228,7 @@ def parse_catalog(search_json_file, affichage):
 
 
     if affichage :
-        print("\n\n==========================TUILES A TELECHARGER==========================")
+        print("\n\n==========================IMAGES A TELECHARGER==========================")
         for prod in download_dict_final.keys():
             print(prod, storage_dict_final[prod])
 

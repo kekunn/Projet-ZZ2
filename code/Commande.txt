@@ -16,4 +16,4 @@ python2 peps_download.py --latmin -37.9 --latmax -37.7 --lonmin 144.9 --lonmax 1
 
 
 
-python2 peps_download.py --latmin 51 --latmax 51.4 --lonmin 4.2 --lonmax 4.6
+python2 peps_download.py --latmin 15.1 --latmax 15.5 --lonmin 44 --lonmax 44.4 --tape
