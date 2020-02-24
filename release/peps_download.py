@@ -566,4 +566,4 @@ manquant.close()
 
 
 if (os.path.getsize(sys.argv[11] + "/manquant.txt") == 0) : 
-    os.remove("sys.argv[11] + "/manquant.txt"")
+    os.remove(sys.argv[11] + "/manquant.txt")
