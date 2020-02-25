@@ -64,7 +64,7 @@ def parse_catalog(search_json_file, affichage):
     tuiles = {}
     nb_tuile = 0
 
-
+    # On récupère les identifiant des tuiles
     for i in range(len(data["features"])):
         prod = data["features"][i]["properties"]["productIdentifier"]
         existe = False
@@ -72,6 +72,7 @@ def parse_catalog(search_json_file, affichage):
             if tuiles[j] == prod[38:44]:
                 existe = True
 
+        #On ignore les tuiles sur les colonnes 01 et 60 qui proviennent d'un bug de PEPS
         if not existe and prod[39:41] != "60" and prod[39:41] != "01": 
             tuiles[nb_tuile] = prod[38:44]
             nb_tuile += 1
@@ -143,10 +144,11 @@ def parse_catalog(search_json_file, affichage):
 
     # On récupère la liste des images dans une liste pour un traitement plus facile
     for prod1 in list(download_dict.keys()):
-        liste_img.append(prod1)
+        if prod1[39:41] != "01" or prod1[39:41] != "60":
+            liste_img.append(prod1)
 
 
-    #On trie la liste pour un traitement plus efficace et aussi prendre les images les plus récentes en prioritées
+    #On trie la liste dans le sens chronologique inverse pour un traitement plus efficace et aussi prendre les images les plus récentes en prioritées
     liste_img.sort(reverse=True, key = lambda x: x[11:19])
 
     if affichage : 
@@ -159,6 +161,7 @@ def parse_catalog(search_json_file, affichage):
 
     boucle = 0
 
+    #Periode ultra réduite
     if latitude > 20:
         mois_debut = '08'
         mois_fin = '07'
@@ -176,11 +179,12 @@ def parse_catalog(search_json_file, affichage):
 
         i = 0
 
+        #On recule jusqu'au mois de fin
         if boucle == 0 :
-            while i < len(liste_img) and liste_img[i][15:17] > mois_debut :
+            while i < len(liste_img) and liste_img[i][15:17] > mois_fin :
                 i += 1;
 
-        #On récupère 
+        #Tant que le meilleur groupe ne contient pas toutes les tuiles voulu
         while len(A_Dl) != len(tuiles) and i < len(liste_img):
 
             prod1 = liste_img[i]
@@ -191,6 +195,7 @@ def parse_catalog(search_json_file, affichage):
             temp = {}
             temp[act] = prod1
 
+            #On génére tout les groupes possible à partir d'une image 
             while j < len(liste_img) and compare_date(prod1[11:19], prod2[11:19]) < diff_date_max and (boucle == 1 or prod2[15:17] >= mois_fin) :
                 prod2 = liste_img[j]
                 inutile = False
