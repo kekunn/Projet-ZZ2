@@ -8,11 +8,11 @@ python2 peps_download.py --latmin -31.5 --latmax -31.2 --lonmin -64 --lonmax -64
 
 python2 peps_download.py --latmin -30 --latmax -22 --lonmin 14 --lonmax 20 => Desert de Namibi (79 tuiles à DL, 59 dans une période de 5 jours (ajouter les code des tuiles manquantes ?))
 python2 peps_download.py --latmin 51.4 --latmax 51.6 --lonmin -0.2 --lonmax 0.1 => Londres(4 images trouvées en septembre)
-python2 peps_download.py --latmin 49.5 --latmax 49.7 --lonmin 5.9 --lonmax 6.3 => Luxembourg (6 tuiles à DL (Zones trop grande ?) en trouve 5)
-python2 peps_download.py --latmin 43.1 --latmax 43.4 --lonmin -3.1 --lonmax -2.8 => Bilbao (trouve 4 tuile en Juin)
+python2 peps_download.py --latmin 49.4 --latmax 49.8 --lonmin 5.9 --lonmax 6.3 => Luxembourg (6 tuiles à DL (Zones trop grande ?) en trouve 5)
+python2 peps_download.py --latmin 43 --latmax 43.4 --lonmin -3.2 --lonmax -2.8 => Bilbao (trouve 4 tuile en Juin)
 python2 peps_download.py --latmin 28.3 --latmax 28.9 --lonmin 76.9 --lonmax 77.5 => New Delhi (4 images octobre, aucune image sur la période juillet/aout)
-python2 peps_download.py --latmin 36.6 --latmax 37 --lonmin 10 --lonmax 10.3 => Tunis (4 images en juillet (parfait))
-python2 peps_download.py --latmin -37.9 --latmax -37.7 --lonmin 144.9 --lonmax 145.1 => Melbourne (4 images en janvier (zone réduite ?))
+python2 peps_download.py --latmin 36.6 --latmax 37 --lonmin 10 --lonmax 10.4 => Tunis (4 images en juillet (parfait))
+python2 peps_download.py --latmin -38 --latmax -37.6 --lonmin 144.7 --lonmax 145.3 => Melbourne (4 images en janvier (zone réduite ?))
 
 
 
