@@ -144,7 +144,7 @@ def parse_catalog(search_json_file, affichage):
 
     # On récupère la liste des images dans une liste pour un traitement plus facile
     for prod1 in list(download_dict.keys()):
-        if prod1[39:41] != "01" or prod1[39:41] != "60":
+        if prod1[39:41] != "01" and prod1[39:41] != "60":
             liste_img.append(prod1)
 
 
@@ -188,19 +188,19 @@ def parse_catalog(search_json_file, affichage):
         while len(A_Dl) != len(tuiles) and i < len(liste_img):
 
             prod1 = liste_img[i]
-            prod2 = liste_img[i]
 
             j = i + 1
             act = 1
             temp = {}
             temp[act] = prod1
 
+            if j < len(liste_img) :
+                prod2 = liste_img[j]
+
             #On génére tout les groupes possible à partir d'une image 
             while j < len(liste_img) and compare_date(prod1[11:19], prod2[11:19]) < diff_date_max and (boucle == 1 or prod2[15:17] >= mois_fin) :
-                prod2 = liste_img[j]
                 inutile = False
                 for k in temp:
-
                     if temp[k][33:37] == prod2[33:37] and compare_date(temp[k][11:19], prod2[11:19]) != 0:
                         inutile = True
                     if temp[k][38:44] == prod2[38:44]:
@@ -211,6 +211,8 @@ def parse_catalog(search_json_file, affichage):
                     temp[act] = prod2
 
                 j += 1
+                if j < len(liste_img):
+                    prod2 = liste_img[j]
 
             if act > best:
                 best = act
@@ -252,10 +254,11 @@ def parse_catalog(search_json_file, affichage):
     return(prod, download_dict_final, storage_dict_final, size_dict_final)
 
 
-
+#Fonction de comparaison de dates
 def compare_date(date1, date2):
     d1 = date(int(date1[:4]), int(date1[4:6]), int(date1[6:8]))
     d2 = date(int(date2[:4]), int(date2[4:6]), int(date2[6:8]))
+
     return abs((d1 - d2).days)
 
 
