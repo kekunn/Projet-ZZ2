@@ -10,6 +10,7 @@ Request::Request(QStringList arguments) : _args(arguments)
 
 void Request::run (Ui::MainWindow* ui, std::vector<QStringList> arguments, int id)
 {
+    std::cout << "Yoooo" << std::endl;
     script = new QProcess();
     /* Reset de l'affichage */
     ui->output_display->clear();

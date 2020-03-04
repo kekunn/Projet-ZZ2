@@ -1,5 +1,5 @@
-#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "Argument.h"
 
 
 
@@ -111,6 +111,7 @@ void MainWindow::on_pushButton_clicked()
             std::vector<QStringList> args_list;
             QString line = in.readLine();
             std::vector<QString> name_list;
+            std::vector<Argument> args;
 
             while (!in.atEnd())
             {
@@ -118,7 +119,15 @@ void MainWindow::on_pushButton_clicked()
                 QString line = in.readLine();
 
                 QRegExp rx("[;]");// match a comma
-                QStringList list = line.split(rx, QString::SkipEmptyParts);
+                QStringList list = line.split(rx);
+                std::cout << "Testss : " << list[8].toStdString() << std::endl;
+                args.push_back(Argument(list[0],
+                                        list[1],
+                                        list[2],
+                                        list[5],
+                                        list[6],
+                                        list[7],
+                                        list[8]));
 
                 coord_list.push_back(std::make_pair(list[0].toStdString(), list[1].toStdString()));
                 name_list.push_back(list[2]);
@@ -129,13 +138,25 @@ void MainWindow::on_pushButton_clicked()
             {
                 QString latmin, latmax, longmin, longmax;
 
-                double lattitude = std::stod(std::get<0>(coord_list[i]));
-                double longitude = std::stod(std::get<1>(coord_list[i]));
+                double lattitude = std::stod(args[i].lat_.toStdString());
+                double longitude = std::stod(args[i].lon_.toStdString());
 
-                latmin = QString::number(lattitude - 0.2);
-                latmax = QString::number(lattitude + 0.2);
-                longmin = QString::number(longitude - 0.2);
-                longmax = QString::number(longitude + 0.2);
+                if (args[i].ecart_ != "")
+                {
+                    double ecart = std::stod(args[i].ecart_.toStdString());
+                    latmin = QString::number(lattitude - ecart);
+                    latmax = QString::number(lattitude + ecart);
+                    longmin = QString::number(longitude - ecart);
+                    longmax = QString::number(longitude + ecart);
+                }
+                else
+                {
+                    latmin = QString::number(lattitude - 0.2);
+                    latmax = QString::number(lattitude + 0.2);
+                    longmin = QString::number(longitude - 0.2);
+                    longmax = QString::number(longitude + 0.2);
+                }
+
 
                 QStringList arguments{"peps_download.py", "--latmin", latmin,
                                                           "--latmax", latmax,
@@ -143,7 +164,23 @@ void MainWindow::on_pushButton_clicked()
                                                           "--lonmax", longmax,
                                                           "--windows",
                                                           "-w", "./DL/" + name_list[i] };
-                std::cout << "Vous avez selectionne : " << QString::fromStdString(std::get<0>(coord_list[i])).toStdString() << " / " << QString::fromStdString(std::get<1>(coord_list[i])).toStdString() << std::endl;
+                if (args[i].deb_ != "")
+                {
+                    arguments.push_back("--star_date");
+                    arguments.push_back(args[i].deb_);
+                }
+                if (args[i].fin_ != "")
+                {
+                    arguments.push_back("--end_date");
+                    arguments.push_back(args[i].fin_);
+                }
+                if (args[i].couv_ != "")
+                {
+                    arguments.push_back("--cc");
+                    arguments.push_back(args[i].couv_);
+                }
+
+                std::cout << "On ajoute l'argument" << std::endl;
                 args_list.push_back(arguments);
             }
 
