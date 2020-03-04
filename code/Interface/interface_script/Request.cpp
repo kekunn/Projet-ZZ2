@@ -68,6 +68,11 @@ void Request::run (Ui::MainWindow* ui, std::vector<QStringList> arguments, int i
 
 
     std::cout << "On lance le script Python id : " << id << std::endl;
+    for (int i = 0; i < arguments[id].length(); i++)
+    {
+         std::cout << "On lance la requète suivante : " << arguments[id][i].toStdString() << std::endl;
+    }
+
     ui->progressBar->setValue((float)(id + 1) / arguments.size() * 100);
     script->start("python.exe", arguments[id]);
 /*

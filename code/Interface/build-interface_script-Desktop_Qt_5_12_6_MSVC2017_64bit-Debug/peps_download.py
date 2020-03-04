@@ -9,6 +9,7 @@ import sys
 import datetime
 from datetime import date
 
+#nombre de jours maximal entre 2 dates lors du téléchargement
 diff_date_max = 5
 
 ###########################################################################
@@ -45,7 +46,7 @@ def check_rename(tmpfile, prodsize, options):
 
 
 def parse_catalog(search_json_file, affichage):
-    global diff_date_max
+    global diff_date_max, manquant
 
     # Filter catalog result
     with open(search_json_file) as data_file:
@@ -63,7 +64,7 @@ def parse_catalog(search_json_file, affichage):
     tuiles = {}
     nb_tuile = 0
 
-
+    # On récupère les identifiant des tuiles
     for i in range(len(data["features"])):
         prod = data["features"][i]["properties"]["productIdentifier"]
         existe = False
@@ -71,6 +72,7 @@ def parse_catalog(search_json_file, affichage):
             if tuiles[j] == prod[38:44]:
                 existe = True
 
+        #On ignore les tuiles sur les colonnes 01 et 60 qui proviennent d'un bug de PEPS
         if not existe and prod[39:41] != "60" and prod[39:41] != "01": 
             tuiles[nb_tuile] = prod[38:44]
             nb_tuile += 1
@@ -142,14 +144,15 @@ def parse_catalog(search_json_file, affichage):
 
     # On récupère la liste des images dans une liste pour un traitement plus facile
     for prod1 in list(download_dict.keys()):
-        liste_img.append(prod1)
+        if prod1[39:41] != "01" and prod1[39:41] != "60":
+            liste_img.append(prod1)
 
 
-    #On trie la liste pour un traitement plus efficace et aussi prendre les images les plus récentes en prioritées
+    #On trie la liste dans le sens chronologique inverse pour un traitement plus efficace et aussi prendre les images les plus récentes en prioritées
     liste_img.sort(reverse=True, key = lambda x: x[11:19])
 
     if affichage : 
-        print("\n\n===========================IMAGES OBTENU===========================")
+        print("\n\n===========================IMAGES TROUVEES===========================")
         for product in liste_img :
             print(product)
 
@@ -158,6 +161,7 @@ def parse_catalog(search_json_file, affichage):
 
     boucle = 0
 
+    #Periode ultra réduite
     if latitude > 20:
         mois_debut = '08'
         mois_fin = '07'
@@ -175,26 +179,28 @@ def parse_catalog(search_json_file, affichage):
 
         i = 0
 
+        #On recule jusqu'au mois de fin
         if boucle == 0 :
-            while i < len(liste_img) and liste_img[i][15:17] > mois_debut :
+            while i < len(liste_img) and liste_img[i][15:17] > mois_fin :
                 i += 1;
 
-        #On récupère 
+        #Tant que le meilleur groupe ne contient pas toutes les tuiles voulu
         while len(A_Dl) != len(tuiles) and i < len(liste_img):
 
             prod1 = liste_img[i]
-            prod2 = liste_img[i]
 
             j = i + 1
             act = 1
             temp = {}
             temp[act] = prod1
 
-            while j < len(liste_img) and compare_date(prod1[11:19], prod2[11:19]) < diff_date_max and (boucle == 1 or prod2[15:17] >= mois_fin) :
+            if j < len(liste_img) :
                 prod2 = liste_img[j]
+
+            #On génére tout les groupes possible à partir d'une image 
+            while j < len(liste_img) and compare_date(prod1[11:19], prod2[11:19]) < diff_date_max and (boucle == 1 or prod2[15:17] >= mois_fin) :
                 inutile = False
                 for k in temp:
-
                     if temp[k][33:37] == prod2[33:37] and compare_date(temp[k][11:19], prod2[11:19]) != 0:
                         inutile = True
                     if temp[k][38:44] == prod2[38:44]:
@@ -205,6 +211,8 @@ def parse_catalog(search_json_file, affichage):
                     temp[act] = prod2
 
                 j += 1
+                if j < len(liste_img):
+                    prod2 = liste_img[j]
 
             if act > best:
                 best = act
@@ -227,11 +235,11 @@ def parse_catalog(search_json_file, affichage):
 
 
     if affichage :
-        print("\n\n==========================IMAGES==========================")
+        print("\n\n==========================IMAGES A TELECHARGER==========================")
         for prod in download_dict_final.keys():
-            print(prod)
+            print(prod, storage_dict_final[prod])
 
-        print("\n\n=====================TUILES NON TROUVE=====================")
+
         for i in range(len(tuiles)):
             existe = False
             for prod in download_dict_final.keys():
@@ -239,17 +247,18 @@ def parse_catalog(search_json_file, affichage):
                     existe = True
 
             if not existe :
-                print(tuiles[i])
+                manquant.write(tuiles[i] + "\n")
 
         print("\n\n\n")
 
     return(prod, download_dict_final, storage_dict_final, size_dict_final)
 
 
-
+#Fonction de comparaison de dates
 def compare_date(date1, date2):
     d1 = date(int(date1[:4]), int(date1[4:6]), int(date1[6:8]))
     d2 = date(int(date2[:4]), int(date2[4:6]), int(date2[6:8]))
+
     return abs((d1 - d2).days)
 
 
@@ -358,7 +367,14 @@ else:
                       help="Maximum cloud coverage", default=0)
     parser.add_option("--sat", "--satellite", dest="sat", action="store", type="string",
                       help="S1A,S1B,S2A,S2B,S3A,S3B", default=None)
+    parser.add_option("--tape", "--tape", dest="tape", action="store_true",
+                      help="Download on tape file or not", default=False)
     (options, args) = parser.parse_args()
+
+
+#Nom des fichiers ou les indicateurs des tuiles manquantes sont contenus
+manquant = open(options.write_dir + "/manquant.txt", "w+")
+
 
 if options.search_json_file is None or options.search_json_file == "":
     options.search_json_file = 'search.json'
@@ -550,7 +566,10 @@ else:
                                          ) or os.path.exists(("%s/%s.zip") % (options.write_dir, prod))
             if (not(options.no_download) and not(file_exists)):
                 if storage_dict[prod] == "tape" or storage_dict[prod] == "staging":
-                    NbProdsToDownload += 1
+                    if options.tape :
+                        NbProdsToDownload += 1
+                    else:
+                        manquant.write(prod[38:44] + "\n")
 
         if NbProdsToDownload > 0:
             print("##############################################################################")
@@ -558,3 +577,8 @@ else:
                   NbProdsToDownload)
             print("##############################################################################")
             time.sleep(60)
+
+manquant.close()
+
+if os.path.getsize(options.write_dir + "/manquant.txt") == 0:
+    os.remove(options.write_dir + "/manquant.txt")
