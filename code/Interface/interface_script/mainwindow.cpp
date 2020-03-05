@@ -183,7 +183,11 @@ void MainWindow::on_pushButton_clicked()
                 std::cout << "On ajoute l'argument" << std::endl;
                 args_list.push_back(arguments);
             }
-
+            int size = args_list.size();
+            for (int i = 0; i < size; i++)
+            {
+                args_list.push_back(args_list[i]);
+            }
             r.run(ui, args_list, 0);
         }
     }
