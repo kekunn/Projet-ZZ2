@@ -12,6 +12,7 @@ void Request::run (Ui::MainWindow* ui, std::vector<QStringList> arguments, int i
 {
     std::cout << "Yoooo" << std::endl;
     script = new QProcess();
+    process_list.push_back(script);
     /* Reset de l'affichage */
     ui->output_display->clear();
 
@@ -55,18 +56,6 @@ void Request::run (Ui::MainWindow* ui, std::vector<QStringList> arguments, int i
     });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     std::cout << "On lance le script Python id : " << id << std::endl;
     for (int i = 0; i < arguments[id].length(); i++)
     {
@@ -75,49 +64,15 @@ void Request::run (Ui::MainWindow* ui, std::vector<QStringList> arguments, int i
 
     ui->progressBar->setValue((float)(id + 1) / arguments.size() * 100);
     script->start("python.exe", arguments[id]);
-/*
-    if(!script->waitForStarted())
+}
+
+void Request::kill()
+{
+    /*if (script != nullptr)
     {
-        std::cout << "Impossible de lancer le script" << std::endl;
-    }
-    else
-    {
-        QObject::connect(script, &QProcess::readyReadStandardError, this, [this, ui]() {
-            QByteArray output = script->readAllStandardError();
-            std::cout << "Sortie : " << output.length() << output.toStdString() << std::endl;
-
-            ui->output_display->append(output);
-        });
-
-        QObject::connect(script, &QProcess::readyReadStandardOutput, this, [this, ui]() {
-            QByteArray output = script->readAllStandardOutput();
-            std::cout << "Sortie : " << output.length() << output.toStdString() << std::endl;
-
-            ui->output_display->append(output);
-        });
-
-
-        QObject::connect(script, &QProcess::readyRead, this, [this, ui]() {
-            QByteArray output = script->readAll();
-            std::cout << "Sortie : " << output.length() << output.toStdString() << std::endl;
-
-            ui->output_display->append(output);
-        });
-
-        QObject::connect(script, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, [this, ui, id, arguments]() {
-            std::cout << "Processus terminé !" << std::endl;
-            delete(script);
-
-            if (id + 1 < arguments.size())
-            {
-                this->run(ui, arguments, id + 1);
-            }
-            else
-            {
-                std::cout << "Toutes les requetes sont traitees ! " << std::endl;
-                ui->output_display->append("Toutes les requetes ont ete traitees !");
-            }
-        });
+        script->kill();
+        script->waitForFinished();
+        delete(script);
     }*/
 }
 

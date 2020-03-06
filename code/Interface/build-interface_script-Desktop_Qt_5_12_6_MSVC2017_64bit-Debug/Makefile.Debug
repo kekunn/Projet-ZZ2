@@ -19,13 +19,13 @@ CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStri
 INCPATH       = -I..\interface_script -I. -IC:\Qt\5.12.6\msvc2017_64\include -IC:\Qt\5.12.6\msvc2017_64\include\QtWidgets -IC:\Qt\5.12.6\msvc2017_64\include\QtGui -IC:\Qt\5.12.6\msvc2017_64\include\QtANGLE -IC:\Qt\5.12.6\msvc2017_64\include\QtCore -Idebug -I. -I/include -IC:\Qt\5.12.6\msvc2017_64\mkspecs\win32-msvc 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = C:\Qt\5.12.6\msvc2017_64\lib\Qt5Widgetsd.lib C:\Qt\5.12.6\msvc2017_64\lib\Qt5Guid.lib C:\Qt\5.12.6\msvc2017_64\lib\Qt5Cored.lib  C:\Qt\5.12.6\msvc2017_64\lib\qtmaind.lib /LIBPATH:C:\openssl\lib /LIBPATH:C:\Utils\my_sql\mysql-5.6.11-winx64\lib /LIBPATH:C:\Utils\postgresql\pgsql\lib shell32.lib 
+LIBS          = C:\Qt\5.12.6\msvc2017_64\lib\Qt5Widgetsd.lib C:\Qt\5.12.6\msvc2017_64\lib\Qt5Guid.lib C:\Qt\5.12.6\msvc2017_64\lib\Qt5Cored.lib debug\interface_script_resource.res  C:\Qt\5.12.6\msvc2017_64\lib\qtmaind.lib /LIBPATH:C:\openssl\lib /LIBPATH:C:\Utils\my_sql\mysql-5.6.11-winx64\lib /LIBPATH:C:\Utils\postgresql\pgsql\lib shell32.lib 
 QMAKE         = C:\Qt\5.12.6\msvc2017_64\bin\qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\interface_script_resource.res
 COPY          = copy /y
 SED           = $(QMAKE) -install sed
 COPY_FILE     = copy /y
@@ -141,11 +141,14 @@ DESTDIR_TARGET = debug\interface_script.exe
 first: all
 all: Makefile.Debug  debug\interface_script.exe
 
-debug\interface_script.exe: C:\Qt\5.12.6\msvc2017_64\lib\Qt5Widgetsd.lib C:\Qt\5.12.6\msvc2017_64\lib\Qt5Guid.lib C:\Qt\5.12.6\msvc2017_64\lib\Qt5Cored.lib C:\Qt\5.12.6\msvc2017_64\lib\qtmaind.lib ui_mainwindow.h $(OBJECTS) 
+debug\interface_script.exe: C:\Qt\5.12.6\msvc2017_64\lib\Qt5Widgetsd.lib C:\Qt\5.12.6\msvc2017_64\lib\Qt5Guid.lib C:\Qt\5.12.6\msvc2017_64\lib\Qt5Cored.lib C:\Qt\5.12.6\msvc2017_64\lib\qtmaind.lib ui_mainwindow.h $(OBJECTS) debug\interface_script_resource.res
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
 debug\Argument.obj debug\Request.obj debug\main.obj debug\mainwindow.obj debug\qrc_image_presentation.obj debug\moc_Request.obj debug\moc_mainwindow.obj
 $(LIBS)
 <<
+
+debug\interface_script_resource.res: interface_script_resource.rc
+	rc /NOLOGO -D_DEBUG $(DEFINES) -fo debug\interface_script_resource.res interface_script_resource.rc
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\interface_script\interface_script.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -158,6 +161,7 @@ dist:
 clean: compiler_clean 
 	-$(DEL_FILE) debug\Argument.obj debug\Request.obj debug\main.obj debug\mainwindow.obj debug\qrc_image_presentation.obj debug\moc_Request.obj debug\moc_mainwindow.obj
 	-$(DEL_FILE) debug\interface_script.vc.pdb debug\interface_script.ilk debug\interface_script.idb
+	-$(DEL_FILE) debug\interface_script_resource.res
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash debug\interface_script.pdb
@@ -502,6 +506,7 @@ debug\moc_mainwindow.cpp: ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmessagebox.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QTextStream \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\QCloseEvent \
 		debug\moc_predefs.h \
 		C:\Qt\5.12.6\msvc2017_64\bin\moc.exe
 	C:\Qt\5.12.6\msvc2017_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include D:/Documents/Etudes/Projet_ZZ2/Projet-ZZ2/code/Interface/build-interface_script-Desktop_Qt_5_12_6_MSVC2017_64bit-Debug/debug/moc_predefs.h -IC:/Qt/5.12.6/msvc2017_64/mkspecs/win32-msvc -ID:/Documents/Etudes/Projet_ZZ2/Projet-ZZ2/code/Interface/interface_script -IC:/Qt/5.12.6/msvc2017_64/include -IC:/Qt/5.12.6/msvc2017_64/include/QtWidgets -IC:/Qt/5.12.6/msvc2017_64/include/QtGui -IC:/Qt/5.12.6/msvc2017_64/include/QtANGLE -IC:/Qt/5.12.6/msvc2017_64/include/QtCore -I. -I"D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include" -I"D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include" -I"D:\Windows Kits\10\include\10.0.18362.0\ucrt" -I"D:\Windows Kits\10\include\10.0.18362.0\shared" -I"D:\Windows Kits\10\include\10.0.18362.0\um" -I"D:\Windows Kits\10\include\10.0.18362.0\winrt" -I"D:\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\interface_script\mainwindow.h -o debug\moc_mainwindow.cpp
@@ -690,7 +695,8 @@ debug\Argument.obj: ..\interface_script\Argument.cpp ..\interface_script\Argumen
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMessageBox \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmessagebox.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QTextStream \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\QCloseEvent
 
 debug\Request.obj: ..\interface_script\Request.cpp ..\interface_script\Request.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QProcess \
@@ -999,7 +1005,8 @@ debug\main.obj: ..\interface_script\main.cpp ..\interface_script\mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMessageBox \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmessagebox.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QTextStream \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\QCloseEvent
 
 debug\mainwindow.obj: ..\interface_script\mainwindow.cpp ui_mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QVariant \
@@ -1162,7 +1169,8 @@ debug\mainwindow.obj: ..\interface_script\mainwindow.cpp ui_mainwindow.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\QMessageBox \
 		C:\Qt\5.12.6\msvc2017_64\include\QtWidgets\qmessagebox.h \
 		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QTextStream \
-		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile
+		C:\Qt\5.12.6\msvc2017_64\include\QtCore\QFile \
+		C:\Qt\5.12.6\msvc2017_64\include\QtGui\QCloseEvent
 
 debug\qrc_image_presentation.obj: debug\qrc_image_presentation.cpp 
 

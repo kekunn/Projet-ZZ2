@@ -28,9 +28,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QRadioButton *radioButton;
     QRadioButton *radioButton_2;
-    QTextEdit *textEdit;
     QTextEdit *textEdit_2;
     QTextEdit *textEdit_3;
     QTextEdit *textEdit_4;
@@ -58,20 +56,9 @@ public:
         MainWindow->setAutoFillBackground(true);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        radioButton = new QRadioButton(centralwidget);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
-        radioButton->setEnabled(true);
-        radioButton->setGeometry(QRect(50, 130, 82, 17));
-        radioButton->setCheckable(true);
-        radioButton->setChecked(false);
-        radioButton->setAutoRepeat(false);
         radioButton_2 = new QRadioButton(centralwidget);
         radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
         radioButton_2->setGeometry(QRect(410, 130, 82, 17));
-        textEdit = new QTextEdit(centralwidget);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setEnabled(false);
-        textEdit->setGeometry(QRect(50, 160, 241, 31));
         textEdit_2 = new QTextEdit(centralwidget);
         textEdit_2->setObjectName(QString::fromUtf8("textEdit_2"));
         textEdit_2->setEnabled(false);
@@ -126,15 +113,15 @@ public:
         progressBar->setValue(0);
         radioButton_3 = new QRadioButton(centralwidget);
         radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
-        radioButton_3->setGeometry(QRect(50, 200, 82, 17));
+        radioButton_3->setGeometry(QRect(50, 130, 82, 17));
         pushButton_2 = new QPushButton(centralwidget);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setEnabled(false);
-        pushButton_2->setGeometry(QRect(50, 230, 75, 31));
+        pushButton_2->setGeometry(QRect(50, 160, 75, 31));
         textEdit_6 = new QTextEdit(centralwidget);
         textEdit_6->setObjectName(QString::fromUtf8("textEdit_6"));
         textEdit_6->setEnabled(false);
-        textEdit_6->setGeometry(QRect(130, 230, 251, 31));
+        textEdit_6->setGeometry(QRect(130, 160, 251, 31));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(50, 20, 111, 71));
@@ -163,7 +150,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        radioButton->setText(QApplication::translate("MainWindow", "Ville", nullptr));
         radioButton_2->setText(QApplication::translate("MainWindow", "Zone", nullptr));
         pushButton->setText(QApplication::translate("MainWindow", "Rechercher ...", nullptr));
         textBrowser->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"

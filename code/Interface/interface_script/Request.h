@@ -13,10 +13,12 @@ class Request : public QObject
         Request(QStringList arguments);
 
         void run (Ui::MainWindow* ui, std::vector<QStringList> arguments, int id);
+        void kill();
 
     private :
         QStringList _args;
         QProcess* script;
+        std::vector<QProcess*> process_list;
 };
 
 

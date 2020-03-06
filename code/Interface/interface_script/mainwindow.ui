@@ -17,31 +17,6 @@
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QRadioButton" name="radioButton">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>130</y>
-      <width>82</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Ville</string>
-    </property>
-    <property name="checkable">
-     <bool>true</bool>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-    <property name="autoRepeat">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QRadioButton" name="radioButton_2">
     <property name="geometry">
      <rect>
@@ -53,19 +28,6 @@
     </property>
     <property name="text">
      <string>Zone</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>160</y>
-      <width>241</width>
-      <height>31</height>
-     </rect>
     </property>
    </widget>
    <widget class="QTextEdit" name="textEdit_2">
@@ -271,7 +233,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>200</y>
+      <y>130</y>
       <width>82</width>
       <height>17</height>
      </rect>
@@ -287,7 +249,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>230</y>
+      <y>160</y>
       <width>75</width>
       <height>31</height>
      </rect>
@@ -303,7 +265,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>230</y>
+      <y>160</y>
       <width>251</width>
       <height>31</height>
      </rect>

@@ -19,25 +19,10 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_radioButton_clicked()
-{
-    choice = 1;
-
-    ui->textEdit->setEnabled(true);
-
-    ui->pushButton_2->setEnabled(false);
-    ui->textEdit_6->setEnabled(false);
-    ui->textEdit_2->setEnabled(false);
-    ui->textEdit_3->setEnabled(false);
-    ui->textEdit_4->setEnabled(false);
-    ui->textEdit_5->setEnabled(false);
-}
-
 void MainWindow::on_radioButton_2_clicked()
 {
     choice = 2;
 
-    ui->textEdit->setEnabled(false);
     ui->pushButton_2->setEnabled(false);
     ui->textEdit_6->setEnabled(false);
 
@@ -54,7 +39,6 @@ void MainWindow::on_radioButton_3_clicked()
     ui->pushButton_2->setEnabled(true);
     ui->textEdit_6->setEnabled(true);
 
-    ui->textEdit->setEnabled(false);
     ui->textEdit_2->setEnabled(false);
     ui->textEdit_3->setEnabled(false);
     ui->textEdit_4->setEnabled(false);
@@ -64,29 +48,7 @@ void MainWindow::on_radioButton_3_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-    if (choice == 1)
-    {
-
-        QStringList arguments{"peps_download.py", "-l",  "Paris"};
-
-
-        script.start("python.exe", arguments);
-        if(!script.waitForStarted())
-        {
-            std::cout << "Impossible de lancer le script" << std::endl;
-        }
-        else
-        {
-
-            QObject::connect(&script, &QProcess::readyReadStandardError, this, [this]() {
-                QByteArray output = script.readAllStandardError();
-                std::cout << output.toStdString() << std::endl;
-
-                ui->output_display->append(output);
-            });
-        }
-    }
-    else if (choice == 2)
+    if (choice == 2)
     {
         std::vector<QStringList> args_list;
         QStringList arguments{"peps_download.py", "--latmin", QString::fromUtf8(lat_min.c_str()),
@@ -166,7 +128,7 @@ void MainWindow::on_pushButton_clicked()
                                                           "-w", "./DL/" + name_list[i] };
                 if (args[i].deb_ != "")
                 {
-                    arguments.push_back("--star_date");
+                    arguments.push_back("--start_date");
                     arguments.push_back(args[i].deb_);
                 }
                 if (args[i].fin_ != "")
@@ -186,17 +148,15 @@ void MainWindow::on_pushButton_clicked()
             int size = args_list.size();
             for (int i = 0; i < size; i++)
             {
-                args_list.push_back(args_list[i]);
+                QStringList tmp = args_list[i];
+                tmp.push_back("--tape");
+                args_list.push_back(tmp);
             }
             r.run(ui, args_list, 0);
         }
     }
 }
 
-void MainWindow::on_textEdit_textChanged()
-{
-    city_name = ui->textEdit->toPlainText().toUtf8().constData();
-}
 
 void MainWindow::on_textEdit_2_textChanged()
 {
@@ -227,6 +187,25 @@ void MainWindow::on_pushButton_2_clicked()
     QMessageBox::information(this, tr("File"), "Vous avez sélectionné : " + path_file);
     ui->textEdit_6->setText(path_file);
     file_path = path_file;
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    QMessageBox::StandardButton answer = QMessageBox::question(
+                this,
+                tr("Quitter"),
+                tr("Voulez-vous vraiment fermer la fenêtre cela interrompra tous les téléchargements en cours"),
+                QMessageBox::Yes | QMessageBox::No);
+
+    if(answer == QMessageBox::Yes)
+    {
+        r.kill();
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
+    }
 }
 
 

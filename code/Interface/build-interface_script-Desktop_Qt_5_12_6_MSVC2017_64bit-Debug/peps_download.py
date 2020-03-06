@@ -266,6 +266,7 @@ def compare_date(date1, date2):
 # ==================
 # parse command line
 # ==================
+
 if len(sys.argv) == 1:
     prog = os.path.basename(sys.argv[0])
     print('      ' + sys.argv[0] + ' [options]')

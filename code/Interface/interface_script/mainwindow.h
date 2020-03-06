@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QFile>
+#include <QCloseEvent>
 
 #include <iostream>
 #include <stdio.h>
@@ -31,15 +32,12 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_radioButton_clicked();
 
     void on_radioButton_2_clicked();
 
     void on_radioButton_3_clicked();
 
     void on_pushButton_clicked();
-
-    void on_textEdit_textChanged();
 
     void on_textEdit_2_textChanged();
 
@@ -50,6 +48,8 @@ private slots:
     void on_textEdit_5_textChanged();
 
     void on_pushButton_2_clicked();
+
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::MainWindow *ui;

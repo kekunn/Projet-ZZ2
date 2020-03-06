@@ -2,6 +2,7 @@
 # -*- coding: iso-8859-1 -*-
 import json
 import time
+import signal
 import os
 import os.path
 import optparse
@@ -582,3 +583,4 @@ manquant.close()
 
 if os.path.getsize(options.write_dir + "/manquant.txt") == 0:
     os.remove(options.write_dir + "/manquant.txt")
+	
